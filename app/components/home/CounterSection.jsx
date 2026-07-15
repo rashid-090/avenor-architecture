@@ -68,7 +68,7 @@ export default function CounterSection() {
   }, []);
 
   return (
-    <section className="bg-white text-zinc-950 py-16 border-t border-zinc-100">
+    <section className="bg-white text-zinc-950 py-16 border-y border-zinc-100">
       <div 
         ref={containerRef}
         className="w-[95%] mx-auto grid grid-cols-2 md:grid-cols-4 gap-y-12 gap-x-8 md:gap-x-12 place-items-center"
@@ -84,7 +84,7 @@ export default function CounterSection() {
               0{s.suffix}
             </span>
             {/* Label text */}
-            <span className="text-[12px] md:text-[13px] text-zinc-500 font-light tracking-wide max-w-[200px] leading-relaxed select-none">
+            <span className="text-[10px] md:text-[13px] text-zinc-500 font-light tracking-wide max-w-[200px] leading-relaxed select-none">
               {s.label}
             </span>
           </div>

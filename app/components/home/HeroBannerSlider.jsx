@@ -3,12 +3,12 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 
 const slides = [
   {
     id: 0,
-    image: "/slide1.png",
+    image: "https://images.unsplash.com/photo-1543071293-d91175a68672?q=100&w=2070&auto=format&fit=crop",
     tag: "FEATURED PROJECT / 2024",
     title: "Kaave Academy",
     subtitle: "Beyond Architecture. Creating Experiences.",
@@ -17,7 +17,7 @@ const slides = [
   },
   {
     id: 1,
-    image: "/slide2.png",
+    image: "https://images.unsplash.com/photo-1625447956229-40bad977175c?q=100&w=2072&auto=format&fit=crop",
     tag: "RESIDENTIAL / 2024",
     title: "Desert Haven Villa",
     subtitle: "Where Solitude Meets Sublime Design.",
@@ -26,7 +26,7 @@ const slides = [
   },
   {
     id: 2,
-    image: "/slide3.png",
+    image: "https://images.unsplash.com/photo-1739125714645-96ecb3274ad6?q=100&w=2070&auto=format&fit=crop",
     tag: "CIVIC / 2023",
     title: "Forma Cultural Center",
     subtitle: "Architecture as Living Art.",
@@ -71,6 +71,14 @@ export default function HeroBannerSlider() {
   const linkRef = useRef(null);
   const subtitleRef = useRef(null);
   const dotsRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Subtle vertical translation as page scrolls down
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
   const slide = slides[current];
 
@@ -151,11 +159,12 @@ export default function HeroBannerSlider() {
       <AnimatePresence mode="sync">
         <motion.div
           key={current}
-          className="absolute inset-0 slide-bg"
+          style={{ y }}
+          className="absolute inset-0 w-full h-[120%] -top-[10%] slide-bg"
           initial={{ opacity: 0, scale: 1.08 }}
           animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.97 }}
-          transition={{ duration: 1.1, ease: [0.43, 0.13, 0.23, 0.96] }}
+          exit={{ opacity: 0, scale: 1 }}
+          transition={{ duration: 1, ease: [0.43, 0.13, 0.23, 0.96] }}
         >
           <Image
             src={slide.image}
@@ -188,7 +197,7 @@ export default function HeroBannerSlider() {
 
           {/* Giant animated title */}
           <div className="mb-10">
-            <h1 className="text-white font-light text-[clamp(3rem,6vw,6rem)] leading-[0.9] tracking-tight">
+            <h1 className="text-white font-medium text-[clamp(3rem,5vw,5rem)] leading-[0.9] tracking-tight">
               <AnimatePresence mode="wait">
                 <SplitTitle key={current} text={slide.title} slideId={current} />
               </AnimatePresence>

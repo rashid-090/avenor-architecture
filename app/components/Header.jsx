@@ -2,13 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-
+import Image from "next/image";
 const navLinks = [
   { label: "Home", href: "#" },
   { label: "About", href: "#about" },
   { label: "Portfolio", href: "#portfolio" },
   { label: "Services", href: "#services" },
-  { label: "Media & Awards", href: "#media" },
 ];
 
 export default function Header() {
@@ -103,13 +102,8 @@ export default function Header() {
       <div className="flex items-center justify-between px-6 md:px-10 py-5">
         {/* Logo */}
         <div ref={logoRef} className="flex items-center gap-2 cursor-pointer">
-          <div className="flex flex-col leading-none">
-            <span className="text-white text-xl font-semibold tracking-tight">
-              Avenore
-            </span>
-            <span className="text-white/50 text-[10px] tracking-[0.15em] uppercase font-light">
-              architects
-            </span>
+          <div className="relative w-52 h-14">
+            <Image src='/avenor-wh-logo.webp' className="object-contain" fill alt="logo"/>
           </div>
         </div>
 
@@ -153,7 +147,7 @@ export default function Header() {
           />
           <span
             className={`block w-6 h-px bg-white transition-all duration-300 ${
-              mobileOpen ? "-rotate-45 -translate-y-[6px]" : ""
+              mobileOpen ? "-rotate-45 -translate-y-[8px]" : ""
             }`}
           />
         </button>

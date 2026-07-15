@@ -18,13 +18,13 @@ const servicesList = [
   },
   {
     title: "Renovation",
-       img: "./service/renovation.svg",
+    img: "./service/renovation.svg",
     description:
       "Avenore strives toward a socially just and equitable world where buildings positively contribute to the environment.",
   },
   {
     title: "Interior Design",
-       img: "./service/interior.svg",
+    img: "./service/interior.svg",
     description:
       "We honor the profound and nuanced ways humans and the environment interact with, use, and are shaped by our work.",
   },
@@ -54,7 +54,7 @@ export default function AboutSection() {
               trigger: textRevealRef.current,
               start: "top 80%",
             },
-          }
+          },
         );
       }
 
@@ -72,7 +72,7 @@ export default function AboutSection() {
               trigger: textRevealRef.current,
               start: "top 80%",
             },
-          }
+          },
         );
       }
 
@@ -92,7 +92,7 @@ export default function AboutSection() {
               trigger: cardsRef.current,
               start: "top 85%",
             },
-          }
+          },
         );
       }
     }, sectionRef);
@@ -113,15 +113,24 @@ export default function AboutSection() {
             WHO WE ARE
           </p>
           <h2 className="text-zinc-900 text-2xl md:text-[34px] lg:text-[38px] font-normal leading-[1.3] tracking-tight">
-            Avenore Architects is an award-winning modern architecture firm based in New York. We specialize in contemporary design through our signature Natural Modern approach.
+            Avenore Architects is an award-winning modern architecture firm
+            based in UAE. We specialize in contemporary design through our
+            signature Natural Modern approach.
           </h2>
         </div>
         <div ref={linkRef} className="flex-shrink-0 md:mb-2">
           <a
             href="#portfolio"
-            className="group inline-flex items-center gap-2 text-zinc-950 font-medium text-sm tracking-wide border-b border-black pb-0.5 hover:opacity-85 transition-opacity"
+            className="group relative inline-flex items-center gap-2 text-zinc-950 font-medium text-sm tracking-wide pb-0.5 hover:opacity-85 transition-opacity"
           >
-            More about us
+            {/* The Text Wrapper */}
+            <span className="relative">
+              More about us
+              {/* Dynamic Running Underline Effect */}
+              <span className="absolute bottom-0 left-0 h-[1px] w-full scale-x-0 bg-black transition-transform duration-300 ease-out origin-left group-hover:scale-x-100 group-hover:origin-left"></span>
+            </span>
+
+            {/* Your Original SVG Icon */}
             <svg
               width="16"
               height="16"
@@ -154,7 +163,6 @@ export default function AboutSection() {
           className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8"
         >
           {servicesList.map((service, i) => {
-            const Icon = service.icon;
             return (
               <div
                 key={i}
@@ -162,7 +170,12 @@ export default function AboutSection() {
               >
                 {/* Lucide React Icon with thin stroke width */}
                 <div className="mb-6 text-zinc-900 group-hover:scale-105 transition-transform duration-300">
-                 <img className="object-contain" src={service.img} alt="" />
+                  <img
+                    className="object-contain"
+                    src={service.img}
+                    alt=""
+                    loading="lazy"
+                  />
                 </div>
 
                 {/* Thin divider line matching the reference image */}
