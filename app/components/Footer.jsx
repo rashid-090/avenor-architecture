@@ -165,17 +165,21 @@ export default function Footer() {
 
         {/* Bottom Row (Copyrights & Go to Top) */}
         <div className="border-t border-zinc-100 pt-4  flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-zinc-500 text-xs font-light tracking-wide">
-            © {year} Avenore Studio. All rights reserved. <span className="text-zinc-300 mx-1">|</span> Powered by{" "}
-            <a
-              href="https://straylinesstudio.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-zinc-500 hover:text-zinc-950 transition-colors font-medium"
-            >
-              Stray Lines Studio
-            </a>
-          </p>
+          <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 text-zinc-500 text-xs font-light tracking-wide text-center sm:text-left">
+            <span>© {year} Avenore Studio. All rights reserved.</span>
+            <span className="hidden sm:inline text-zinc-300">|</span>
+            <span>
+              Powered by{" "}
+              <a
+                href="https://straylinesstudio.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-zinc-500 hover:text-zinc-950 transition-colors font-medium"
+              >
+                Stray Lines Studio
+              </a>
+            </span>
+          </div>
           
           <div className="flex items-center gap-8">
             <div className="flex gap-6">
