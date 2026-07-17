@@ -129,7 +129,7 @@ export default function Header() {
         >
           <Link href="/" className="relative block w-40 h-16 md:w-52 md:h-14">
             <Image
-              src={isHome ? "/avenor-wh-logo.webp" : "/avenor-bl-logo.webp"}
+              src={isHome ? "/avenor-wht-logo.webp" : "/avenor-bl-logo.webp"}
               className="object-contain"
               fill
               priority
