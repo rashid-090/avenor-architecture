@@ -1,22 +1,35 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
 import Image from "next/image";
+import Link from "next/link";
 const navLinks = [
-  { label: "Home", href: "#" },
-  { label: "About", href: "#about" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "Services", href: "#services" },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Projects", href: "/projects" },
+  { label: "Services", href: "/services" },
 ];
 
 export default function Header() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const headerRef = useRef(null);
   const logoRef = useRef(null);
   const navRef = useRef(null);
   const ctaRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [logoOpacity, setLogoOpacity] = useState(0);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (sessionStorage.getItem("hasLoaded") === "true") {
+        setLogoOpacity(1);
+      }
+    }
+  }, []);
   
   const lastScrollY = useRef(0);
   const isVisible = useRef(true); // Track visibility state without triggering rerenders
@@ -32,7 +45,13 @@ export default function Header() {
       gsap.fromTo(
         logoRef.current,
         { x: -30, opacity: 0 },
-        { x: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 0.5 }
+        { 
+          x: 0, 
+          opacity: typeof window !== "undefined" && sessionStorage.getItem("hasLoaded") === "true" ? 1 : 0, 
+          duration: 1, 
+          ease: "power3.out", 
+          delay: 0.5 
+        }
       );
       
       const navLinksElements = navRef.current ? navRef.current.querySelectorAll("a") : null;
@@ -96,15 +115,28 @@ export default function Header() {
     <header
       ref={headerRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-500 ${
-        scrolled ? "bg-black/60 backdrop-blur-xl" : "bg-transparent"
+        isHome
+          ? scrolled ? "bg-black/60 backdrop-blur-xl" : "bg-transparent"
+          : scrolled ? "bg-white/90 backdrop-blur-xl" : "bg-white"
       }`}
     >
-      <div className="flex items-center justify-between px-6 md:px-10 py-5">
+      <div className="flex items-center justify-between px-6 md:px-10 md:py-5">
         {/* Logo */}
-        <div ref={logoRef} className="flex items-center gap-2 cursor-pointer">
-          <div className="relative w-52 h-14">
-            <Image src='/avenor-wh-logo.webp' className="object-contain" fill alt="logo"/>
-          </div>
+        <div 
+          ref={logoRef} 
+          className="flex items-center gap-2 cursor-pointer header-logo-target"
+          style={{ opacity: isHome ? logoOpacity : 1 }}
+        >
+          <Link href="/" className="relative block w-40 h-16 md:w-52 md:h-14">
+            <Image
+              src={isHome ? "/avenor-wh-logo.webp" : "/avenor-bl-logo.webp"}
+              className="object-contain"
+              fill
+              priority
+              sizes="(max-width: 768px) 160px, 208px"
+              alt="logo"
+            />
+          </Link>
         </div>
 
         {/* Desktop Nav */}
@@ -113,7 +145,11 @@ export default function Header() {
             <a
               key={i}
               href={link.href}
-              className="nav-link text-white/80 hover:text-white text-sm tracking-wide transition-colors duration-200 font-medium"
+              className={`nav-link text-sm tracking-wide transition-colors duration-200 font-medium ${
+                isHome
+                  ? "text-white/80 hover:text-white"
+                  : "text-zinc-600 hover:text-zinc-950"
+              }`}
             >
               {link.label}
             </a>
@@ -121,13 +157,17 @@ export default function Header() {
         </nav>
 
         {/* CTA Button */}
-        <a
+        <Link
           ref={ctaRef}
-          href="#contact"
-          className="hidden md:flex items-center px-5 py-2.5 border border-white text-white text-sm font-medium tracking-wide hover:bg-white hover:text-black transition-all duration-300"
+          href="/contact"
+          className={`hidden md:flex items-center px-5 py-2.5 border text-sm font-medium tracking-wide transition-all duration-300 ${
+            isHome
+              ? "border-white text-white hover:bg-white hover:text-black"
+              : "border-zinc-900 text-zinc-900 hover:bg-zinc-900 hover:text-white"
+          }`}
         >
           Contact us
-        </a>
+        </Link>
 
         {/* Mobile Menu Button */}
         <button
@@ -136,19 +176,19 @@ export default function Header() {
           aria-label="Toggle menu"
         >
           <span
-            className={`block w-6 h-px bg-white transition-all duration-300 ${
-              mobileOpen ? "rotate-45 translate-y-[6px]" : ""
-            }`}
+            className={`block w-6 h-px transition-all duration-300 ${
+              isHome ? "bg-white" : "bg-zinc-900"
+            } ${mobileOpen ? "rotate-45 translate-y-[6px]" : ""}`}
           />
           <span
-            className={`block w-4 h-px bg-white transition-all duration-300 ${
-              mobileOpen ? "opacity-0 w-0" : ""
-            }`}
+            className={`block w-4 h-px transition-all duration-300 ${
+              isHome ? "bg-white" : "bg-zinc-900"
+            } ${mobileOpen ? "opacity-0 w-0" : ""}`}
           />
           <span
-            className={`block w-6 h-px bg-white transition-all duration-300 ${
-              mobileOpen ? "-rotate-45 -translate-y-[8px]" : ""
-            }`}
+            className={`block w-6 h-px transition-all duration-300 ${
+              isHome ? "bg-white" : "bg-zinc-900"
+            } ${mobileOpen ? "-rotate-45 -translate-y-[8px]" : ""}`}
           />
         </button>
       </div>
@@ -157,7 +197,11 @@ export default function Header() {
       <div
         className={`md:hidden overflow-hidden transition-all duration-500 ${
           mobileOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-        } bg-black/90 backdrop-blur-xl border-t border-white/10`}
+        } ${
+          isHome
+            ? "bg-black/90 backdrop-blur-xl border-t border-white/10"
+            : "bg-white/95 backdrop-blur-xl border-t border-zinc-100"
+        }`}
       >
         <nav className="flex flex-col px-6 py-6 gap-5">
           {navLinks.map((link, i) => (
@@ -165,18 +209,26 @@ export default function Header() {
               key={i}
               href={link.href}
               onClick={() => setMobileOpen(false)}
-              className="text-white/70 hover:text-white text-base tracking-wide transition-colors font-light"
+              className={`text-base tracking-wide transition-colors font-light ${
+                isHome
+                  ? "text-white/70 hover:text-white"
+                  : "text-zinc-600 hover:text-zinc-950"
+              }`}
             >
               {link.label}
             </a>
           ))}
-          <a
-            href="#contact"
+          <Link
+            href="/contact"
             onClick={() => setMobileOpen(false)}
-            className="mt-2 inline-flex w-fit items-center px-5 py-2.5 border border-white text-white text-sm font-medium tracking-wide"
+            className={`mt-2 w-full text-center items-center px-5 py-2.5 border text-sm font-medium tracking-wide ${
+              isHome
+                ? "border-white text-white"
+                : "border-zinc-900 text-zinc-900"
+            }`}
           >
             Contact us
-          </a>
+          </Link>
         </nav>
       </div>
     </header>

@@ -120,7 +120,7 @@ export default function PortfolioSection() {
       <div className="w-[95%] mx-auto flex flex-row items-end justify-between mb-8">
         <div>
           <p className="text-[11px] uppercase tracking-[0.25em] text-zinc-500 font-semibold mb-4">
-            PORTFOLIO
+            PROJECT
           </p>
           <h2 className="text-zinc-900 text-3xl md:text-[38px] font-normal tracking-tight">
             Selected Work
@@ -131,7 +131,7 @@ export default function PortfolioSection() {
             href="#"
             className="group flex items-center gap-1.5 text-zinc-950 font-medium text-xs md:text-sm tracking-wide border-b border-black pb-0.5 hover:opacity-85 transition-opacity"
           >
-            Full portfolio
+            Full projects
             <svg
               width="14"
               height="14"

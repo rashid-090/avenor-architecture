@@ -1,5 +1,8 @@
 import { Urbanist } from "next/font/google";
 import "./globals.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import SmoothScrollProvider from "./components/SmoothScrollProvider";
 
 const urbanist = Urbanist({
   variable: "--font-urbanist",
@@ -11,7 +14,13 @@ export const metadata = {
   title: "Avenore Architecture — Beyond Architecture. Creating Experiences.",
   description:
     "Avenore Architecture is an award-winning studio crafting iconic spaces that blend artistry with precision. Explore our portfolio of featured projects.",
-  keywords: ["architecture", "design", "firm", "portfolio", "modern architecture"],
+  keywords: [
+    "architecture",
+    "design",
+    "firm",
+    "portfolio",
+    "modern architecture",
+  ],
   manifest: "/favicons/manifest.json",
   icons: {
     icon: [
@@ -21,15 +30,51 @@ export const metadata = {
     ],
     shortcut: "/favicons/favicon.ico",
     apple: [
-      { url: "/favicons/apple-icon-57x57.png", sizes: "57x57", type: "image/png" },
-      { url: "/favicons/apple-icon-60x60.png", sizes: "60x60", type: "image/png" },
-      { url: "/favicons/apple-icon-72x72.png", sizes: "72x72", type: "image/png" },
-      { url: "/favicons/apple-icon-76x76.png", sizes: "76x76", type: "image/png" },
-      { url: "/favicons/apple-icon-114x114.png", sizes: "114x114", type: "image/png" },
-      { url: "/favicons/apple-icon-120x120.png", sizes: "120x120", type: "image/png" },
-      { url: "/favicons/apple-icon-144x144.png", sizes: "144x144", type: "image/png" },
-      { url: "/favicons/apple-icon-152x152.png", sizes: "152x152", type: "image/png" },
-      { url: "/favicons/apple-icon-180x180.png", sizes: "180x180", type: "image/png" },
+      {
+        url: "/favicons/apple-icon-57x57.png",
+        sizes: "57x57",
+        type: "image/png",
+      },
+      {
+        url: "/favicons/apple-icon-60x60.png",
+        sizes: "60x60",
+        type: "image/png",
+      },
+      {
+        url: "/favicons/apple-icon-72x72.png",
+        sizes: "72x72",
+        type: "image/png",
+      },
+      {
+        url: "/favicons/apple-icon-76x76.png",
+        sizes: "76x76",
+        type: "image/png",
+      },
+      {
+        url: "/favicons/apple-icon-114x114.png",
+        sizes: "114x114",
+        type: "image/png",
+      },
+      {
+        url: "/favicons/apple-icon-120x120.png",
+        sizes: "120x120",
+        type: "image/png",
+      },
+      {
+        url: "/favicons/apple-icon-144x144.png",
+        sizes: "144x144",
+        type: "image/png",
+      },
+      {
+        url: "/favicons/apple-icon-152x152.png",
+        sizes: "152x152",
+        type: "image/png",
+      },
+      {
+        url: "/favicons/apple-icon-180x180.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
     ],
     other: [
       {
@@ -59,9 +104,18 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${urbanist.variable} antialiased`}
       cz-shortcut-listen="true"
+      data-scroll-behavior="smooth"
     >
       <body className="min-h-screen bg-black text-white overflow-x-hidden">
-        {children}
+        {/* Fixed Header */}
+        <Header />
+
+        <SmoothScrollProvider>
+          {children}
+        </SmoothScrollProvider>
+
+        {/* Footer / Contact */}
+        <Footer />
       </body>
     </html>
   );
