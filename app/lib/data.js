@@ -180,7 +180,7 @@ export const portfolioProjects = [
   },
   {
     id: 8,
-    slug: "welington house",
+    slug: "welington-house",
     title: "Welington house",
     image: "https://images.unsplash.com/photo-1585412727339-54e4bae3bbf9?q=100&w=1000&auto=format&fit=crop",
     aspectClass: "aspect-[3/4]",
