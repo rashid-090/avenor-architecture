@@ -24,7 +24,7 @@ const page = () => {
       <About />
       <Values />
       <Approch />
-      <Team />
+      {/* <Team /> */}
     </div>
   );
 }
