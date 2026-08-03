@@ -17,6 +17,9 @@ export default function SmoothScrollProvider({ children }) {
     });
 
     lenisRef.current = lenis;
+    if (typeof window !== "undefined") {
+      window.lenis = lenis;
+    }
 
     function raf(time) {
       lenis.raf(time);
@@ -28,6 +31,9 @@ export default function SmoothScrollProvider({ children }) {
     return () => {
       lenis.destroy();
       lenisRef.current = null;
+      if (typeof window !== "undefined") {
+        window.lenis = null;
+      }
     };
   }, []);
 

@@ -5,7 +5,8 @@ import Image from "next/image";
 import { gsap } from "gsap";
 
 export default function LoadingScreen() {
-  const [shouldRender, setShouldRender] = useState(false);
+  // Initialize to true by default so server renders it instantly
+  const [shouldRender, setShouldRender] = useState(true);
   const [isFinished, setIsFinished] = useState(false);
   const loaderLogoRef = useRef(null);
 
@@ -21,9 +22,6 @@ export default function LoadingScreen() {
         if (target) {
           target.style.opacity = "1";
         }
-      } else {
-        // First time load in this session
-        setShouldRender(true);
       }
     }
   }, []);
@@ -123,7 +121,26 @@ export default function LoadingScreen() {
   if (isFinished || !shouldRender) return null;
 
   return (
-    <div className="loading-screen-overlay fixed inset-0 z-[9999] bg-white flex flex-col justify-center items-center select-none">
+    <div
+      id="site-loader"
+      suppressHydrationWarning
+      className="loading-screen-overlay fixed inset-0 z-[9999] bg-white flex flex-col justify-center items-center select-none"
+    >
+      {/* Inline script to bypass visual flash if session already loaded */}
+      <div
+        style={{ display: "none" }}
+        dangerouslySetInnerHTML={{
+          __html: `
+            <script>
+              if (sessionStorage.getItem("hasLoaded") === "true") {
+                var loader = document.getElementById("site-loader");
+                if (loader) loader.style.display = "none";
+              }
+            </script>
+          `,
+        }}
+      />
+
       {/* Centered Logo Container */}
       <div 
         ref={loaderLogoRef} 

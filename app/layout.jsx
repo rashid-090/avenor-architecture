@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import SmoothScrollProvider from "./components/SmoothScrollProvider";
+import GetInTouchSection from "./components/Getintouch";
 
 const urbanist = Urbanist({
   variable: "--font-urbanist",
@@ -103,8 +104,8 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       className={`${urbanist.variable} antialiased`}
-      cz-shortcut-listen="true"
       data-scroll-behavior="smooth"
+      suppressHydrationWarning
     >
       <body className="min-h-screen bg-black text-white overflow-x-hidden">
         {/* Fixed Header */}
@@ -113,6 +114,9 @@ export default function RootLayout({ children }) {
         <SmoothScrollProvider>
           {children}
         </SmoothScrollProvider>
+
+          {/* Get in Touch CTA Banner */}
+      <GetInTouchSection />
 
         {/* Footer / Contact */}
         <Footer />

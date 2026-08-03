@@ -4,6 +4,9 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Home, DraftingCompass, Armchair } from "lucide-react";
+import Link from "next/link";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -11,22 +14,52 @@ if (typeof window !== "undefined") {
 
 const servicesList = [
   {
-    title: "Houses",
-    img: "./service/houses.svg",
+    title: "Architecture",
+    img: "./service/Architecture.svg",
     description:
-      "To create beautiful, healthy buildings to empower families, uplift communities, and improve our living world.",
-  },
-  {
-    title: "Renovation",
-    img: "./service/renovation.svg",
-    description:
-      "Avenore strives toward a socially just and equitable world where buildings positively contribute to the environment.",
+      "We create functional and inspiring architectural designs that blend creativity, sustainability, and timeless aesthetics.",
   },
   {
     title: "Interior Design",
-    img: "./service/interior.svg",
+    img: "./service/Interior-Design.svg",
     description:
-      "We honor the profound and nuanced ways humans and the environment interact with, use, and are shaped by our work.",
+      "Thoughtfully designed interiors that balance comfort, style, and functionality to reflect your lifestyle and vision.",
+  },
+  {
+    title: "Landscape Design",
+    img: "./service/Landscape.svg",
+    description:
+      "Beautiful outdoor spaces designed to complement architecture while enhancing nature, usability, and everyday living.",
+  },
+  {
+    title: "Site Supervision",
+    img: "./service/Site-Supervision.svg",
+    description:
+      "Professional site supervision to ensure every detail is executed with quality, accuracy, and adherence to design.",
+  },
+  {
+    title: "Project Management",
+    img: "./service/Project-Management.svg",
+    description:
+      "End-to-end project coordination that keeps construction on schedule, within budget, and aligned with your goals.",
+  },
+  {
+    title: "Technical Drawing",
+    img: "./service/Technical-Drawing.svg",
+    description:
+      "Detailed architectural drawings that provide precise guidance for smooth construction and seamless project execution.",
+  },
+  {
+    title: "Scale Model",
+    img: "./service/Scale-Model.svg",
+    description:
+      "Realistic architectural scale models that help visualize the design, proportions, and spatial relationships before construction.",
+  },
+  {
+    title: "Interior Fit-Out",
+    img: "./service/Interior-Fit-Out.svg",
+    description:
+      "Complete interior fit-out solutions that transform empty spaces into refined, functional, and ready-to-use environments.",
   },
 ];
 
@@ -119,8 +152,8 @@ export default function AboutSection() {
           </h2>
         </div>
         <div ref={linkRef} className="flex-shrink-0 md:mb-2">
-          <a
-            href="#portfolio"
+          <Link
+            href="/about"
             className="group relative inline-flex items-center gap-2 text-zinc-950 font-medium text-sm tracking-wide pb-0.5 hover:opacity-85 transition-opacity"
           >
             {/* The Text Wrapper */}
@@ -147,7 +180,7 @@ export default function AboutSection() {
                 strokeLinejoin="round"
               />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -157,42 +190,53 @@ export default function AboutSection() {
           OUR SERVICES
         </p>
 
-        {/* 3-Column Cards Grid */}
-        <div
-          ref={cardsRef}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8"
-        >
-          {servicesList.map((service, i) => {
-            return (
-              <div
-                key={i}
-                className="service-card group bg-white border border-zinc-200/80 p-8 md:p-10 flex flex-col justify-start transition-all duration-300 hover:border-zinc-400 hover:shadow-[0_10px_30px_rgba(0,0,0,0.03)]"
-              >
-                {/* Lucide React Icon with thin stroke width */}
-                <div className="mb-6 text-zinc-900 group-hover:scale-105 transition-transform duration-300">
-                  <img
-                    className="object-contain"
-                    src={service.img}
-                    alt=""
-                    loading="lazy"
-                  />
-                </div>
+        {/* Carousel Slider */}
+        <div ref={cardsRef} className="w-full">
+          <Swiper
+            spaceBetween={20}
+            slidesPerView={1.2}
+            grabCursor={true}
+            breakpoints={{
+              1024: {
+                slidesPerView: 3.1,
+                spaceBetween: 32,
+              },
+            }}
+            className="services-swiper !overflow-visible"
+          >
+            {servicesList.map((service, i) => {
+              return (
+                <SwiperSlide key={i} className="!h-auto flex">
+                  <div
+                    className="service-card group bg-white border border-zinc-200/80 p-8 md:p-10 flex flex-col justify-start w-full h-full transition-all duration-300 hover:border-zinc-400 hover:shadow-[0_10px_30px_rgba(0,0,0,0.03)]"
+                  >
+                    {/* Lucide React Icon with thin stroke width */}
+                    <div className=" text-zinc-900 group-hover:scale-105 transition-transform duration-300">
+                      <img
+                        className="object-contain w-16"
+                        src={service.img}
+                        alt=""
+                        loading="lazy"
+                      />
+                    </div>
 
-                {/* Thin divider line matching the reference image */}
-                <div className="border-t border-zinc-200/80 w-full my-6" />
+                    {/* Thin divider line matching the reference image */}
+                    <div className="border-t border-zinc-200/80 w-full my-6" />
 
-                {/* Title */}
-                <h3 className="text-zinc-900 text-xl md:text-2xl font-normal tracking-tight mb-4">
-                  {service.title}
-                </h3>
+                    {/* Title */}
+                    <h3 className="text-zinc-900 text-xl md:text-2xl font-normal tracking-tight mb-4">
+                      {service.title}
+                    </h3>
 
-                {/* Description */}
-                <p className="text-zinc-600 text-sm md:text-[15px] font-light leading-relaxed">
-                  {service.description}
-                </p>
-              </div>
-            );
-          })}
+                    {/* Description */}
+                    <p className="text-zinc-600 text-sm md:text-[15px] font-light leading-relaxed">
+                      {service.description}
+                    </p>
+                  </div>
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
         </div>
       </div>
     </section>

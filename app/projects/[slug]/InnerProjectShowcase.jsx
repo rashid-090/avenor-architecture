@@ -4,8 +4,15 @@ import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { gsap } from "gsap";
+import { ScanSearch } from 'lucide-react';
+
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
 import { portfolioProjects } from "../../lib/data";
+
+import "swiper/css";
+import "swiper/css/pagination";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -25,7 +32,13 @@ export default function InnerProjectShowcase({ project }) {
             const overlay = card.querySelector(".reveal-overlay");
             const image = card.querySelector(".reveal-image img");
 
-            if (overlay && image) {
+            if (overlay) {
+              // Reset overlays to avoid GSAP positioning clashes on state updates
+              gsap.set(overlay, { yPercent: 0 });
+              if (image) {
+                gsap.set(image, { scale: 1.15 });
+              }
+
               const tl = gsap.timeline({
                 scrollTrigger: {
                   trigger: card,
@@ -38,12 +51,16 @@ export default function InnerProjectShowcase({ project }) {
                 yPercent: 101, // slide down to reveal top-to-bottom
                 duration: 1.4,
                 ease: "power3.inOut",
-              }).fromTo(
-                image,
-                { scale: 1.15 },
-                { scale: 1, duration: 1.6, ease: "power2.out" },
-                "-=1.2"
-              );
+              });
+
+              if (image) {
+                tl.fromTo(
+                  image,
+                  { scale: 1.15 },
+                  { scale: 1, duration: 1.6, ease: "power2.out" },
+                  "-=1.2"
+                );
+              }
             }
           });
         }
@@ -53,8 +70,45 @@ export default function InnerProjectShowcase({ project }) {
     return () => ctx.revert();
   }, [project]);
 
-  // Filter other projects to display as related
+  // Gather images for the project gallery directly from data.js
+  const displayGallery = (project.gallery && project.gallery.length > 0)
+    ? project.gallery
+    : [
+        project.metaImage1,
+        project.metaImage2,
+        project.row1Image,
+        project.row2Image,
+        project.row3Image,
+        project.fullWidthImage,
+      ].filter(Boolean);
+
   const related = portfolioProjects.filter((p) => p.slug !== project.slug).slice(0, 4);
+
+  const [lightboxIndex, setLightboxIndex] = React.useState(null);
+
+  const openLightbox = (index) => setLightboxIndex(index);
+  const closeLightbox = () => setLightboxIndex(null);
+
+  const nextImage = (e) => {
+    e?.stopPropagation();
+    setLightboxIndex((prev) => (prev + 1) % displayGallery.length);
+  };
+
+  const prevImage = (e) => {
+    e?.stopPropagation();
+    setLightboxIndex((prev) => (prev - 1 + displayGallery.length) % displayGallery.length);
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (lightboxIndex === null) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowRight") nextImage();
+      if (e.key === "ArrowLeft") prevImage();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [lightboxIndex, displayGallery.length]);
 
   return (
     <div ref={containerRef} className="w-[95%] mx-auto pb-16 md:pb-24">
@@ -77,6 +131,8 @@ export default function InnerProjectShowcase({ project }) {
             alt={project.title}
             fill
             priority
+            loading="eager"
+            fetchPriority="high"
             className="object-cover object-center"
             sizes="95vw"
           />
@@ -107,8 +163,6 @@ export default function InnerProjectShowcase({ project }) {
         </div>
       </div>
 
-    
-
       {/* Split Text Section */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start mb-24">
         {/* Left Column: Giant headline */}
@@ -129,6 +183,109 @@ export default function InnerProjectShowcase({ project }) {
           </div>
         </div>
       </div>
+
+      {/* Swiper Carousel Project Gallery */}
+      {displayGallery.length > 0 && (
+        <div className="mb-24">
+          <div className="flex items-center justify-between mb-8 border-b border-zinc-100 pb-4">
+            <span className="text-[11px] uppercase tracking-[0.25em] text-zinc-400 font-semibold block">
+              PROJECT GALLERY
+            </span>
+            <span className="text-xs text-zinc-400 font-light">
+              {displayGallery.length} Photographs
+            </span>
+          </div>
+
+          <Swiper
+            modules={[Pagination]}
+            pagination={{ clickable: true }}
+            spaceBetween={20}
+            slidesPerView={1.2}
+            breakpoints={{
+              640: {
+                slidesPerView: 2.2,
+                spaceBetween: 24,
+              },
+              1024: {
+                slidesPerView: 3,
+                spaceBetween: 24,
+              },
+            }}
+            className="gallery-swiper !overflow-visible"
+          >
+            {displayGallery.map((imgUrl, idx) => (
+              <SwiperSlide key={idx}>
+                <div
+                  onClick={() => openLightbox(idx)}
+                  className="relative aspect-[4/3] w-full overflow-hidden bg-zinc-100 group cursor-pointer"
+                >
+                  <img
+                    src={imgUrl}
+                    alt={`${project.title} detail photo ${idx + 1}`}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute text-white inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                   <ScanSearch />
+                  </div>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      )}
+
+      {/* Lightbox Modal */}
+      {lightboxIndex !== null && (
+        <div
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-8"
+          onClick={closeLightbox}
+        >
+          {/* Close Button */}
+          <button
+            onClick={closeLightbox}
+            className="absolute top-6 right-6 z-50 text-white/70 hover:text-white transition-colors p-2 text-2xl"
+            aria-label="Close Lightbox"
+          >
+            ✕
+          </button>
+
+          {/* Image Counter */}
+          <div className="absolute top-6 left-6 z-50 text-white/70 text-xs tracking-widest font-mono">
+            {lightboxIndex + 1} / {displayGallery.length}
+          </div>
+
+          {/* Left Arrow */}
+          <button
+            onClick={prevImage}
+            className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all backdrop-blur-md border border-white/10 text-xl"
+            aria-label="Previous Image"
+          >
+            ‹
+          </button>
+
+          {/* Center Main Image */}
+          <div
+            className="relative max-w-5xl max-h-[85vh] w-full h-full flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={displayGallery[lightboxIndex]}
+              alt={`${project.title} preview`}
+              className="max-w-full max-h-[85vh] object-contain shadow-2xl transition-all duration-300"
+            />
+          </div>
+
+          {/* Right Arrow */}
+          <button
+            onClick={nextImage}
+            className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all backdrop-blur-md border border-white/10 text-xl"
+            aria-label="Next Image"
+          >
+            ›
+          </button>
+        </div>
+      )}
 
 
       {/* Related Projects Area */}

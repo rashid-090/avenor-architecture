@@ -3,6 +3,27 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import PhoneInput, { getCountryCallingCode } from "react-phone-number-input";
+import "react-phone-number-input/style.css";
+import flags from "react-phone-number-input/flags";
+
+const CustomFlag = ({ country, countryName }) => {
+  const FlagIcon = flags[country];
+  return (
+    <div className="flex items-center gap-1.5 select-none">
+      {FlagIcon ? (
+        <FlagIcon title={countryName} className="w-[18px] h-[13px] object-contain" />
+      ) : (
+        <span className="w-[18px] h-[13px] bg-zinc-200 block" />
+      )}
+      {country && (
+        <span className="text-zinc-500 text-sm font-light ml-1 whitespace-nowrap">
+          +{getCountryCallingCode(country)}
+        </span>
+      )}
+    </div>
+  );
+};
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -13,17 +34,67 @@ export default function ContactForm() {
     message: "",
   });
   const [status, setStatus] = useState("idle"); // idle | sending | success
+  const [toast, setToast] = useState({ show: false, message: "", type: "error" });
+  const [errors, setErrors] = useState({
+    name: false,
+    email: false,
+    service: false,
+    phone: false,
+  });
+
+  const showToast = (message, type = "error") => {
+    setToast({ show: true, message, type });
+    // Reset toast state after 4 seconds
+    setTimeout(() => {
+      setToast((prev) => ({ ...prev, show: false }));
+    }, 4000);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: false }));
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    const newErrors = {
+      name: !formData.name.trim(),
+      email: !formData.email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email),
+      service: !formData.service,
+      phone: !formData.phone || formData.phone.trim() === "",
+    };
+
+    setErrors(newErrors);
+
+    if (newErrors.name) {
+      showToast("Name is required.", "error");
+      return;
+    }
+    if (newErrors.email) {
+      if (!formData.email.trim()) {
+        showToast("Email address is required.", "error");
+      } else {
+        showToast("Please enter a valid email address.", "error");
+      }
+      return;
+    }
+    if (newErrors.service) {
+      showToast("Please select a service.", "error");
+      return;
+    }
+    if (newErrors.phone) {
+      showToast("Phone number is required.", "error");
+      return;
+    }
+
     setStatus("sending");
     setTimeout(() => {
       setStatus("success");
+      showToast("Message sent successfully!", "success");
       setFormData({
         name: "",
         email: "",
@@ -34,6 +105,13 @@ export default function ContactForm() {
       // Reset status back to idle after 5 seconds
       setTimeout(() => setStatus("idle"), 5000);
     }, 1500);
+  };
+
+  const handlePhoneChange = (val) => {
+    setFormData((prev) => ({ ...prev, phone: val || "" }));
+    if (errors.phone) {
+      setErrors((prev) => ({ ...prev, phone: false }));
+    }
   };
 
   return (
@@ -63,10 +141,11 @@ export default function ContactForm() {
               </span>
               <div className="flex flex-col gap-2">
                 <a
-                  href="mailto:hello@avenore.com"
+                  href="mailto:info@avenorarchitects.com"
+                  target="_blank"
                   className="text-zinc-950 font-normal text-sm md:text-base border-b border-zinc-950 w-fit pb-0.5 hover:opacity-80 transition-opacity"
                 >
-                  hello@avenore.com
+                  	info@avenorarchitects.com
                 </a>
                 <a
                   href="tel:+12030405010"
@@ -80,11 +159,10 @@ export default function ContactForm() {
             {/* Scope Of Work address details */}
             <div>
               <span className="text-[11px] uppercase tracking-[0.25em] text-zinc-400 font-semibold block mb-3">
-                SCOPE OF WORK
+            Contact
               </span>
               <p className="text-zinc-500 text-sm md:text-base font-light leading-relaxed">
-                New York, Seventh Ave, 20th Floor,<br />
-                Floor, NY 10018
+                Dubai - United Arab Emirates
               </p>
             </div>
           </div>
@@ -95,16 +173,18 @@ export default function ContactForm() {
       <div className="relative min-h-[600px] py-5 lg:min-h-screen flex items-center justify-center overflow-hidden">
         {/* Core Wood Panel Image Backdrop */}
         <Image
-          src="https://plus.unsplash.com/premium_photo-1677620678562-5876edb7c126?q=80&w=987&auto=format&fit=crop"
+          src="/contactbg.webp"
           alt="Walnut wood panels"
           fill
           priority
+          loading="eager"
+          fetchPriority="high"
           className="object-cover object-center"
           sizes="(max-width: 1024px) 100vw, 50vw"
         />
 
         {/* Olive-Bronze Form Container Card */}
-        <div className="relative z-10 w-[90%] md:w-[85%] bg-[#16161666] backdrop-blur-md px-8 py-10 md:px-10 md:py-12 shadow-2xl rounded-sm">
+        <div className="relative z-10 w-[90%] md:w-[85%] bg-[#16161666] backdrop-blur-md p-5 md:px-10 md:py-12 shadow-2xl rounded-sm">
           {status === "success" ? (
             <div className="text-center py-16 space-y-4">
               <div className="w-12 h-12 rounded-full border border-white flex items-center justify-center mx-auto mb-6">
@@ -146,15 +226,18 @@ export default function ContactForm() {
                 <label className="text-[10px] text-zinc-200 uppercase tracking-widest block font-medium">
                   Your name
                 </label>
-                <input
-                  type="text"
-                  name="name"
-                  required
-                  placeholder="e.g. John Smith"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 bg-white text-zinc-950 placeholder-zinc-400 text-sm font-light border-none rounded-none focus:outline-none focus:ring-1 focus:ring-zinc-300"
-                />
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="e.g. John Smith"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 bg-white text-zinc-950 placeholder-zinc-400 text-sm font-light border-none rounded-none focus:outline-none focus:ring-1 ${
+                      errors.name 
+                        ? "ring-1 ring-red-500 focus:ring-red-500" 
+                        : "focus:ring-zinc-300"
+                    }`}
+                  />
               </div>
 
               {/* Email address field */}
@@ -162,15 +245,18 @@ export default function ContactForm() {
                 <label className="text-[10px] text-zinc-200 uppercase tracking-widest block font-medium">
                   Email address
                 </label>
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  placeholder="e.g. john@youremail.com"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 bg-white text-zinc-950 placeholder-zinc-400 text-sm font-light border-none rounded-none focus:outline-none focus:ring-1 focus:ring-zinc-300"
-                />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="e.g. john@youremail.com"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 bg-white text-zinc-950 placeholder-zinc-400 text-sm font-light border-none rounded-none focus:outline-none focus:ring-1 ${
+                      errors.email 
+                        ? "ring-1 ring-red-500 focus:ring-red-500" 
+                        : "focus:ring-zinc-300"
+                    }`}
+                  />
               </div>
 
               {/* Service Select field */}
@@ -181,10 +267,13 @@ export default function ContactForm() {
                 <div className="relative w-full">
                   <select
                     name="service"
-                    required
                     value={formData.service}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-white text-zinc-950 text-sm font-light border-none rounded-none focus:outline-none focus:ring-1 focus:ring-zinc-300 appearance-none cursor-pointer pr-10"
+                    className={`w-full px-4 py-3 bg-white text-zinc-950 text-sm font-light border-none rounded-none focus:outline-none focus:ring-1 appearance-none cursor-pointer pr-10 ${
+                      errors.service 
+                        ? "ring-1 ring-red-500 focus:ring-red-500" 
+                        : "focus:ring-zinc-300"
+                    }`}
                   >
                     <option value="" disabled>Select a service</option>
                     <option value="construction">Construction</option>
@@ -218,14 +307,62 @@ export default function ContactForm() {
                 <label className="text-[10px] text-zinc-200 uppercase tracking-widest block font-medium">
                   Phone number
                 </label>
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="e.g. +1 200 300 40"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 bg-white text-zinc-950 placeholder-zinc-400 text-sm font-light border-none rounded-none focus:outline-none focus:ring-1 focus:ring-zinc-300"
-                />
+                <div className="custom-phone-input-wrapper relative">
+                  <PhoneInput
+                    placeholder="e.g. +1 200 300 40"
+                    value={formData.phone}
+                    onChange={handlePhoneChange}
+                    defaultCountry="AE"
+                    flagComponent={CustomFlag}
+                    className={`w-full bg-white text-zinc-950 text-sm font-light focus-within:ring-1 custom-phone-input ${
+                      errors.phone
+                        ? "ring-1 ring-red-500 focus-within:ring-red-500"
+                        : "focus-within:ring-zinc-300"
+                    }`}
+                  />
+                </div>
+                <style>{`
+                  .custom-phone-input {
+                    display: flex !important;
+                    align-items: center;
+                    width: 100%;
+                    background-color: white !important;
+                    padding: 0.75rem 1rem !important;
+                    height: 44px;
+                    border-radius: 0px !important;
+                  }
+                  .custom-phone-input .PhoneInputCountry {
+                    margin-right: 0.75rem;
+                    display: flex !important;
+                    align-items: center !important;
+                    width: auto !important;
+                    position: relative;
+                  }
+                  .custom-phone-input .PhoneInputCountryIcon {
+                    width: auto !important;
+                    height: auto !important;
+                    display: flex !important;
+                    align-items: center !important;
+                    background: transparent !important;
+                    box-shadow: none !important;
+                    border: none !important;
+                  }
+                  .custom-phone-input .PhoneInputCountryIconImg {
+                    display: none !important;
+                  }
+                  .custom-phone-input .PhoneInputInput {
+                    border: none !important;
+                    outline: none !important;
+                    background: transparent !important;
+                    font-size: 0.875rem !important;
+                    font-weight: 300 !important;
+                    color: #09090b !important;
+                    width: 100%;
+                  }
+                  .custom-phone-input .PhoneInputCountrySelect {
+                    cursor: pointer;
+                  }
+                `}</style>
               </div>
 
               {/* Your message field */}
@@ -235,7 +372,6 @@ export default function ContactForm() {
                 </label>
                 <textarea
                   name="message"
-                  required
                   rows="3"
                   placeholder="Add here"
                   value={formData.message}
@@ -248,15 +384,52 @@ export default function ContactForm() {
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="w-24 py-2.5 bg-white text-zinc-950 font-normal text-xs uppercase tracking-widest hover:bg-zinc-900 hover:text-white transition-all duration-300 disabled:opacity-50"
+                className="w-full md:w-40 py-3 bg-white text-zinc-950  text-sm  capitalize tracking-widest hover:bg-main hover:text-white transition-all duration-300 disabled:opacity-50"
               >
-                {status === "sending" ? "..." : "Send"}
+                {status === "sending" ? "sending" : "Send message"}
               </button>
             </form>
           )}
         </div>
       </div>
       </div>
+      {/* Toast Notification */}
+      {toast.show && (
+        <div className={`fixed bottom-8 right-8 z-50 flex items-center gap-3 px-5 py-4 border text-sm font-light shadow-2xl transition-all duration-300 transform translate-y-0 animate-fade-in ${
+          toast.type === "success"
+            ? "bg-zinc-900/95 border-zinc-700 text-white"
+            : "bg-red-950/95 border-red-800 text-red-100"
+        }`}>
+          {/* Toast Icon */}
+          {toast.type === "success" ? (
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" className="text-emerald-400 shrink-0">
+              <path d="M15 4.5L6.75 12.75L3 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          ) : (
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" className="text-red-400 shrink-0">
+              <circle cx="9" cy="9" r="7.5" stroke="currentColor" strokeWidth="1.5"/>
+              <path d="M9 6V10M9 12H9.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+          )}
+          <span>{toast.message}</span>
+        </div>
+      )}
+
+      <style>{`
+        @keyframes slide-up-fade {
+          0% {
+            transform: translateY(1rem);
+            opacity: 0;
+          }
+          100% {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+        .animate-fade-in {
+          animation: slide-up-fade 0.3s ease-out forwards;
+        }
+      `}</style>
     </div>
   );
 }

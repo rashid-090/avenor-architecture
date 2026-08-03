@@ -9,7 +9,9 @@ const navLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Projects", href: "/projects" },
+  { label: "Scale Models", href: "/scale-models" },
   { label: "Services", href: "/services" },
+  { label: "Blogs", href: "/blogs" },
 ];
 
 export default function Header() {
@@ -133,6 +135,8 @@ export default function Header() {
               className="object-contain"
               fill
               priority
+              loading="eager"
+              fetchPriority="high"
               sizes="(max-width: 768px) 160px, 208px"
               alt="logo"
             />
@@ -142,7 +146,7 @@ export default function Header() {
         {/* Desktop Nav */}
         <nav ref={navRef} className="hidden md:flex items-center gap-8">
           {navLinks.map((link, i) => (
-            <a
+            <Link
               key={i}
               href={link.href}
               className={`nav-link text-sm tracking-wide transition-colors duration-200 font-medium ${
@@ -152,7 +156,7 @@ export default function Header() {
               }`}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -205,7 +209,7 @@ export default function Header() {
       >
         <nav className="flex flex-col px-6 py-6 gap-5">
           {navLinks.map((link, i) => (
-            <a
+            <Link
               key={i}
               href={link.href}
               onClick={() => setMobileOpen(false)}
@@ -216,7 +220,7 @@ export default function Header() {
               }`}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
           <Link
             href="/contact"

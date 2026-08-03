@@ -54,10 +54,20 @@ const baseProjects = [
   }
 ];
 
-export default function PortfolioSection() {
+export default function PortfolioSection({ initialProjects = [] }) {
   const sectionRef = useRef(null);
   const swiperRef = useRef(null);
   const [activeSlide, setActiveSlide] = useState(0);
+
+  const [projectsList, setProjectsList] = useState(
+    initialProjects && initialProjects.length > 0 ? initialProjects.slice(0, 6) : baseProjects
+  );
+
+  useEffect(() => {
+    if (initialProjects && initialProjects.length > 0) {
+      setProjectsList(initialProjects.slice(0, 6));
+    }
+  }, [initialProjects]);
 
   const handleDotClick = (index) => {
     if (swiperRef.current) {
@@ -77,7 +87,7 @@ export default function PortfolioSection() {
             const image = card.querySelector(".reveal-image");
             const info = card.querySelector(".project-info");
 
-            if (overlay && image && info) {
+            if (overlay && info) {
               const tl = gsap.timeline({
                 scrollTrigger: {
                   trigger: card,
@@ -90,13 +100,17 @@ export default function PortfolioSection() {
                 xPercent: 101,
                 duration: 1.2,
                 ease: "power3.inOut",
-              })
-              .fromTo(image, 
-                { scale: 1.15 },
-                { scale: 1, duration: 1.4, ease: "power2.out" },
-                "-=1.1"
-              )
-              .fromTo(info,
+              });
+
+              if (image) {
+                tl.fromTo(image, 
+                  { scale: 1.15 },
+                  { scale: 1, duration: 1.4, ease: "power2.out" },
+                  "-=1.1"
+                );
+              }
+
+              tl.fromTo(info,
                 { y: 15, opacity: 0 },
                 { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" },
                 "-=0.7"
@@ -128,10 +142,10 @@ export default function PortfolioSection() {
         </div>
         <div>
           <Link
-            href="#"
-            className="group flex items-center gap-1.5 text-zinc-950 font-medium text-xs md:text-sm tracking-wide border-b border-black pb-0.5 hover:opacity-85 transition-opacity"
+            href="/projects"
+            className="group relative flex items-center gap-1.5 text-zinc-950 font-medium text-xs md:text-sm tracking-wide pb-0.5 hover:opacity-85 transition-opacity"
           >
-            Full projects
+            Show More
             <svg
               width="14"
               height="14"
@@ -148,6 +162,8 @@ export default function PortfolioSection() {
                 strokeLinejoin="round"
               />
             </svg>
+                            <span className="absolute bottom-0 left-0 h-[1px] w-full scale-x-0 bg-black transition-transform duration-300 ease-out origin-left group-hover:scale-x-100 group-hover:origin-left"></span>
+
           </Link>
         </div>
       </div>
@@ -180,8 +196,8 @@ export default function PortfolioSection() {
           onSlideChange={(swiper) => setActiveSlide(swiper.realIndex)}
           className="portfolio-swiper"
         >
-          {baseProjects.map((p) => (
-            <SwiperSlide key={p.id}>
+          {projectsList.map((p, idx) => {
+            const cardContent = (
               <div className="project-card-container flex flex-col group cursor-pointer w-full">
                 {/* Aspect wrapper with overflow hidden */}
                 <div className="relative aspect-[3/4] w-full overflow-hidden bg-zinc-100">
@@ -191,10 +207,10 @@ export default function PortfolioSection() {
                   {/* Project Image */}
                   <div className="reveal-image w-full h-full relative">
                     <Image
-                      src={p.image}
+                      src={p.image || "/portfolio_holis.png"}
                       alt={p.title}
                       fill
-                      priority={p.id === 1}
+                      priority={idx === 0}
                       className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                       sizes="(max-width: 768px) 80vw, 30vw"
                     />
@@ -211,14 +227,26 @@ export default function PortfolioSection() {
                   </p>
                 </div>
               </div>
-            </SwiperSlide>
-          ))}
+            );
+
+            return (
+              <SwiperSlide key={p.id || idx}>
+                {p.slug ? (
+                  <Link href={`/projects/${p.slug}`}>
+                    {cardContent}
+                  </Link>
+                ) : (
+                  cardContent
+                )}
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
       </div>
 
       {/* Slider indicators tracking active Swiper slide index */}
       <div className="w-full flex justify-center items-center gap-2 mt-16 z-20 relative">
-        {baseProjects.map((_, idx) => (
+        {projectsList.map((_, idx) => (
           <button
             key={idx}
             onClick={() => handleDotClick(idx)}

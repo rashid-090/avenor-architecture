@@ -26,7 +26,13 @@ export default function ProjectList() {
             const image = card.querySelector(".reveal-image img");
             const revealImageContainer = card.querySelector(".reveal-image");
 
-            if (overlay && image) {
+            if (overlay) {
+              // Reset overlay state to allow smooth clean reloads
+              gsap.set(overlay, { yPercent: 0 });
+              if (image) {
+                gsap.set(image, { scale: 1.15 });
+              }
+
               const tl = gsap.timeline({
                 scrollTrigger: {
                   trigger: card,
@@ -40,12 +46,16 @@ export default function ProjectList() {
                 yPercent: 101,
                 duration: 1.4,
                 ease: "power3.inOut",
-              }).fromTo(
-                image,
-                { scale: 1.15 },
-                { scale: 1, duration: 1.6, ease: "power2.out" },
-                "-=1.2"
-              );
+              });
+
+              if (image) {
+                tl.fromTo(
+                  image,
+                  { scale: 1.15 },
+                  { scale: 1, duration: 1.6, ease: "power2.out" },
+                  "-=1.2"
+                );
+              }
 
               // Smooth scroll-driven parallax translation on the image container
               if (revealImageContainer) {

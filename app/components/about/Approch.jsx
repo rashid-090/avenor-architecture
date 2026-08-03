@@ -82,10 +82,10 @@ export default function ApproachSection() {
           className="absolute inset-0 w-full h-[124%] -top-[12%] transform-gpu"
         >
           <Image
-            src="https://images.unsplash.com/photo-1518517611416-da57df49b8d3?q=100&w=2092&auto=format&fit=crop"
+            src="/vision.webp"
             alt="Architect drawing blueprints on designer workbench"
             fill
-            className="object-cover object-center"
+            className="object-cover object-bottom"
             sizes="100vw"
             priority
           />

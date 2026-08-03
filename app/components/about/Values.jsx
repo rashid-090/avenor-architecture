@@ -15,138 +15,28 @@ const values = [
     title: "Timeless quality",
     description:
       "We create enduring designs that outlast trends and remain relevant for years to come.",
-    icon: (
-      <svg
-        className="w-20 h-10 text-zinc-950"
-        viewBox="0 0 100 40"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M5 32H95"
-          stroke="currentColor"
-          strokeWidth="1.2"
-          strokeLinecap="round"
-        />
-        <path
-          d="M15 32C15 20.9543 23.9543 12 35 12C46.0457 12 55 20.9543 55 32"
-          stroke="currentColor"
-          strokeWidth="1.2"
-          strokeLinecap="round"
-        />
-        <path
-          d="M10 24L75 10"
-          stroke="currentColor"
-          strokeWidth="1.2"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
+    icon: "/Timeless.svg",
   },
   {
     id: 2,
     title: "Modern functionality",
     description:
       "Every space is thoughtfully designed to be both beautiful and perfectly livable.",
-    icon: (
-      <svg
-        className="w-20 h-10 text-zinc-950"
-        viewBox="0 0 100 40"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M5 32H95"
-          stroke="currentColor"
-          strokeWidth="1.2"
-          strokeLinecap="round"
-        />
-        <path
-          d="M25 32C25 20.9543 33.9543 12 45 12C56.0457 12 65 20.9543 65 32"
-          stroke="currentColor"
-          strokeWidth="1.2"
-          strokeLinecap="round"
-        />
-        <path
-          d="M45 5V38"
-          stroke="currentColor"
-          strokeWidth="1.2"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
+    icon: "/Modern.svg",
   },
   {
     id: 3,
     title: "Client-centered approach",
     description:
       "Your vision leads the way — we listen, adapt, and design with your lifestyle in mind.",
-    icon: (
-      <svg
-        className="w-20 h-10 text-zinc-950"
-        viewBox="0 0 100 40"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M5 32H95"
-          stroke="currentColor"
-          strokeWidth="1.2"
-          strokeLinecap="round"
-        />
-        <path
-          d="M15 32C15 20.9543 23.9543 12 35 12C46.0457 12 55 20.9543 55 32"
-          stroke="currentColor"
-          strokeWidth="1.2"
-          strokeLinecap="round"
-        />
-        <path
-          d="M5 24C15 15 35 15 50 32"
-          stroke="currentColor"
-          strokeWidth="1.2"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
+      icon: "/approach.svg",
   },
   {
     id: 4,
     title: "Conscious craftsmanship",
     description:
       "We value sustainability and partner with artisans who share our commitment to ethical design.",
-    icon: (
-      <svg
-        className="w-20 h-10 text-zinc-950"
-        viewBox="0 0 100 40"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M5 32H95"
-          stroke="currentColor"
-          strokeWidth="1.2"
-          strokeLinecap="round"
-        />
-        <path
-          d="M25 32C25 20.9543 33.9543 12 45 12C56.0457 12 65 20.9543 65 32"
-          stroke="currentColor"
-          strokeWidth="1.2"
-          strokeLinecap="round"
-        />
-        <path
-          d="M45 5V38"
-          stroke="currentColor"
-          strokeWidth="1.2"
-          strokeLinecap="round"
-        />
-        <path
-          d="M25 32L65 18"
-          stroke="currentColor"
-          strokeWidth="1.2"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
+    icon: "/craftsmanship.svg",
   },
 ];
 
@@ -229,8 +119,15 @@ export default function ValuesSection() {
                 className="flex flex-col justify-start w-full"
               >
                 {/* Minimalist Line/Outline Icon */}
-                <div className="mb-4 text-zinc-950 flex items-center h-12">
-                  {value.icon}
+                <div className="relative mb-4 text-zinc-950 flex items-center h-12">
+                  <Image
+                    className="w-20 object-contain"
+                    src={value.icon}
+                    alt={value.title}
+                    width={100}
+                    height={40}
+                    style={{ height: "auto" }}
+                  />
                 </div>
 
                 {/* Divider line under icon */}

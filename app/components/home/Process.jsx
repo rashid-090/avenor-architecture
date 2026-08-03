@@ -121,7 +121,7 @@ export default function ProcessSection() {
                 src="/building-outline.webp"
                 alt="Architectural Wireframe Outline"
                 fill
-                className="object-contain md:object-right"
+                className="object-contain object-center"
                 sizes="(max-width: 1024px) 100vw, 55vw"
                 priority
               />

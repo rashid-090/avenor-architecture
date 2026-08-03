@@ -28,7 +28,7 @@ export default function GetInTouchSection() {
         className="absolute inset-0 w-full h-[130%] -top-[15%] pointer-events-none"
       >
         <Image
-          src="/getintouch_bg.png"
+          src="/getintouch.webp"
           alt="Architectural wood ceiling interior"
           fill
           className="object-cover brightness-[0.72] contrast-[1.03]"
@@ -53,13 +53,14 @@ export default function GetInTouchSection() {
         </div>
 
         {/* Right Side Button */}
-        <div className="w-full md:w-auto">
+        <div className="w-full flex gap-5 md:w-auto">
+
           <Link
-            href="#contact"
+            href="/contact"
             className="w-full md:w-auto inline-flex justify-center items-center bg-white text-zinc-950 px-8 py-4 text-[10px] md:text-xs font-semibold uppercase tracking-[0.2em] transition-colors duration-300 hover:bg-zinc-100 shadow-lg"
           >
             <span className="">
-              Connect with us
+  BOOK A CONSULTATION
             </span>
           </Link>
         </div>

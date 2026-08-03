@@ -3,12 +3,14 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --main: #EF3925;
   --font-sans: var(--font-urbanist);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-main: var(--main);
   --font-sans: var(--font-urbanist);
   --font-mono: var(--font-geist-mono);
 }
@@ -93,5 +95,32 @@ body {
 }
 .showcase-swiper .swiper-slide-active {
   z-index: 2;
+}
+
+/* Gallery Swiper Custom Pagination Dots */
+.gallery-swiper .swiper-pagination {
+  position: relative !important;
+  margin-top: 2rem !important;
+  bottom: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+}
+.gallery-swiper .swiper-pagination-bullet {
+  background: #e4e4e7 !important;
+  opacity: 1 !important;
+  width: 8px !important;
+  height: 8px !important;
+  margin: 0 !important;
+  border-radius: 9999px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.gallery-swiper .swiper-pagination-bullet-active {
+  background: #27272a !important;
+  opacity: 1 !important;
+  width: 20px !important;
+  height: 8px !important;
+  border-radius: 9999px !important;
 }
 

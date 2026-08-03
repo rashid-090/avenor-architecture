@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Parallax } from "swiper/modules";
 import { motion, useScroll, useTransform } from "framer-motion";
+import Link from "next/link";
 
 // Import Swiper styles
 import "swiper/css";
@@ -32,10 +33,20 @@ const projects = [
   },
 ];
 
-export default function ProjectShowcase() {
+export default function ProjectShowcase({ initialScaleModels = [] }) {
   const containerRef = useRef(null);
   const swiperRef = useRef(null);
   const [activeSlide, setActiveSlide] = useState(0);
+
+  const [modelsList, setModelsList] = useState(
+    initialScaleModels && initialScaleModels.length > 0 ? initialScaleModels.slice(0, 6) : projects
+  );
+
+  React.useEffect(() => {
+    if (initialScaleModels && initialScaleModels.length > 0) {
+      setModelsList(initialScaleModels.slice(0, 6));
+    }
+  }, [initialScaleModels]);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -88,59 +99,76 @@ export default function ProjectShowcase() {
           onSlideChange={(swiper) => setActiveSlide(swiper.realIndex)}
           className="showcase-swiper h-[60vh] sm:h-[80vh] w-full"
         >
-          {projects.map((project, index) => (
-            <SwiperSlide key={project.id} className="relative w-full h-full overflow-hidden bg-zinc-950">
-              {/* Image with Swiper Parallax (horizontal) & Framer Motion (vertical) attributes */}
-              <div 
-                className="absolute inset-0 w-full h-full overflow-hidden"
-                data-swiper-parallax="30%"
-              >
-                <motion.div
-                  style={{ y }}
-                  className="relative w-full h-[124%] -top-[12%]"
+          {modelsList.map((project, index) => {
+            const slideContent = (
+              <div className="relative w-full h-full">
+                {/* Image with Swiper Parallax (horizontal) & Framer Motion (vertical) attributes */}
+                <div 
+                  className="absolute inset-0 w-full h-full overflow-hidden"
+                  data-swiper-parallax="30%"
                 >
-                  <Image
-                    src={project.src}
-                    alt={project.title}
-                    fill
-                    priority={index === 0}
-                    className="object-cover brightness-[0.8] contrast-[1.02]"
-                    sizes="95vw"
-                  />
-                </motion.div>
-              </div>
-
-              {/* Gradient overlay for text contrast */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent pointer-events-none z-10" />
-
-              {/* HUD Content Overlay with Parallax effects */}
-              <div 
-                className="absolute inset-x-0 bottom-0 p-8 sm:p-16 flex justify-between items-end z-20 pointer-events-none"
-                data-swiper-parallax="-150"
-                data-swiper-parallax-opacity="0"
-              >
-                <div>
-                  <span className="text-xs font-mono text-zinc-400 tracking-widest block mb-2">
-                    COLLECTION / 0{index + 1}
-                  </span>
-                  <h2 className="text-xl sm:text-3xl font-light tracking-wide text-zinc-100">
-                    {project.title}
-                  </h2>
+                  <motion.div
+                    style={{ y }}
+                    className="relative w-full h-[124%] -top-[12%]"
+                  >
+                    <Image
+                      src={project.src || project.image || "/scale_model_1.png"}
+                      alt={project.title}
+                      fill
+                      priority={index === 0}
+                      loading={index === 0 ? "eager" : "lazy"}
+                      className="object-cover brightness-[0.8] contrast-[1.02]"
+                      sizes="95vw"
+                    />
+                  </motion.div>
                 </div>
-                {/* <div className="hidden sm:block text-right">
-                  <span className="text-xs tracking-[0.25em] text-zinc-400 border-b border-zinc-800 pb-2 hover:text-white transition-colors cursor-pointer pointer-events-auto">
-                    DISCOVER SPACE
-                  </span>
-                </div> */}
+
+                {/* Gradient overlay for text contrast */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent pointer-events-none z-10" />
+
+                {/* HUD Content Overlay with Parallax effects */}
+                <div 
+                  className="absolute inset-x-0 bottom-0 p-8 sm:p-16 flex justify-between items-end z-20 pointer-events-none"
+                  data-swiper-parallax="-150"
+                  data-swiper-parallax-opacity="0"
+                >
+                  <div>
+                    <span className="text-xs font-mono text-zinc-400 tracking-widest block mb-2">
+                      COLLECTION / 0{index + 1}
+                    </span>
+                    <h2 className="text-xl sm:text-3xl font-light tracking-wide text-zinc-100">
+                      {project.title}
+                    </h2>
+                  </div>
+                  {project.slug && (
+                    <div className="hidden sm:block text-right pointer-events-auto">
+                      <span className="text-xs tracking-[0.25em] text-zinc-400 border-b border-zinc-800 pb-2 hover:text-white transition-colors cursor-pointer">
+                        DISCOVER SPACE
+                      </span>
+                    </div>
+                  )}
+                </div>
               </div>
-            </SwiperSlide>
-          ))}
+            );
+
+            return (
+              <SwiperSlide key={project.id || index} className="relative w-full h-full overflow-hidden bg-zinc-950">
+                {project.slug ? (
+                  <Link href={`/scale-models/${project.slug}`} className="block w-full h-full">
+                    {slideContent}
+                  </Link>
+                ) : (
+                  slideContent
+                )}
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
       </div>
 
       {/* Clickable Pagination dots tracking active Swiper index */}
       <div className="w-full flex justify-center items-center gap-2 mt-12 z-20 relative">
-        {projects.map((_, idx) => (
+        {modelsList.map((_, idx) => (
           <button
             key={idx}
             onClick={() => handleDotClick(idx)}

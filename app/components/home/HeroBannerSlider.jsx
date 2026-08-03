@@ -8,7 +8,7 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 const slides = [
   {
     id: 0,
-    image: "https://images.unsplash.com/photo-1543071293-d91175a68672?q=100&w=2070&auto=format&fit=crop",
+    image: "/banner1.webp",
     tag: "FEATURED PROJECT / 2024",
     title: "Kaave Academy",
     subtitle: "Beyond Architecture. Creating Experiences.",
@@ -17,7 +17,7 @@ const slides = [
   },
   {
     id: 1,
-    image: "https://images.unsplash.com/photo-1625447956229-40bad977175c?q=100&w=2072&auto=format&fit=crop",
+    image: "/banner2.webp",
     tag: "RESIDENTIAL / 2024",
     title: "Desert Haven Villa",
     subtitle: "Where Solitude Meets Sublime Design.",
@@ -26,7 +26,7 @@ const slides = [
   },
   {
     id: 2,
-    image: "https://images.unsplash.com/photo-1739125714645-96ecb3274ad6?q=100&w=2070&auto=format&fit=crop",
+    image: "/banner3.webp",
     tag: "CIVIC / 2023",
     title: "Forma Cultural Center",
     subtitle: "Architecture as Living Art.",
@@ -78,7 +78,7 @@ export default function HeroBannerSlider() {
   });
 
   // Subtle vertical translation as page scrolls down
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
   const slide = slides[current];
 
@@ -171,6 +171,8 @@ export default function HeroBannerSlider() {
             alt={slide.title}
             fill
             priority
+            loading="eager"
+            fetchPriority="high"
             className="object-cover object-center"
             sizes="100vw"
           />
@@ -209,15 +211,15 @@ export default function HeroBannerSlider() {
             <motion.a
               ref={linkRef}
               href={slide.link}
-              className="flex items-center gap-2 text-white/80 hover:text-white text-sm tracking-wider border-b border-white/40 hover:border-white pb-0.5 pointer-events-auto capitalize font-medium transition-colors duration-200"
+              className="flex relative group items-center gap-2 text-white/80 hover:text-white text-sm tracking-wider pb-0.5 pointer-events-auto capitalize font-medium transition-colors duration-200"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8 }}
             >
               {slide.linkText}
               <svg
-                width="18"
-                height="18"
+                width="14"
+                height="14"
                 viewBox="0 0 18 18"
                 fill="none"
                 className="translate-x-0 group-hover:translate-x-1 transition-transform"
@@ -230,6 +232,8 @@ export default function HeroBannerSlider() {
                   strokeLinejoin="round"
                 />
               </svg>
+                              <span className="absolute bottom-0 left-0 h-[1px] w-full scale-x-0 bg-white transition-transform duration-300 ease-out origin-left group-hover:scale-x-100 group-hover:origin-left"></span>
+
             </motion.a>
           </div>
         </div>

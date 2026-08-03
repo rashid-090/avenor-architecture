@@ -18,7 +18,13 @@ export default function About() {
       const overlay = sectionRef.current?.querySelector(".about-reveal-overlay");
       const image = sectionRef.current?.querySelector(".about-reveal-image img");
 
-      if (overlay && image) {
+      if (overlay) {
+        // Reset overlay to avoid GSAP positioning issues
+        gsap.set(overlay, { yPercent: 0 });
+        if (image) {
+          gsap.set(image, { scale: 1.15 });
+        }
+
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current.querySelector(".about-image-wrapper"),
@@ -31,12 +37,16 @@ export default function About() {
           yPercent: 101,
           duration: 1.4,
           ease: "power3.inOut",
-        }).fromTo(
-          image,
-          { scale: 1.15 },
-          { scale: 1, duration: 1.6, ease: "power2.out" },
-          "-=1.2"
-        );
+        });
+
+        if (image) {
+          tl.fromTo(
+            image,
+            { scale: 1.15 },
+            { scale: 1, duration: 1.6, ease: "power2.out" },
+            "-=1.2"
+          );
+        }
       }
 
       // --- Text fade-in ---
@@ -114,10 +124,12 @@ export default function About() {
               {/* Core image */}
               <div className="about-reveal-image w-full h-full relative">
                 <Image
-                  src="/about_architect.png"
+                  src="/abt1.webp"
                   alt="Architect reviewing blueprints at studio"
                   fill
                   priority
+                  loading="eager"
+                  fetchPriority="high"
                   className="object-cover object-center"
                   sizes="(max-width: 1024px) 95vw, 50vw"
                 />

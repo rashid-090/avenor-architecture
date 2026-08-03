@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { Mail, ArrowUp, Camera, Share2, Pin } from "lucide-react";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -46,12 +47,14 @@ export default function Footer() {
                 { label: "About Us", href: "/about" },
                 { label: "Our Services", href: "/services" },
                 { label: "Our Projects", href: "/projects" },
+                { label: "Scale Modals", href: "/scale-models" },
+                { label: "Blogs", href: "/blogs" },
                 { label: "Contact Us", href: "/contact" }
               ].map((link, idx) => (
                 <Link
                   key={idx}
                   href={link.href}
-                  className="text-zinc-500 hover:text-zinc-950 text-xs tracking-wider font-light transition-colors w-fit"
+                  className="text-zinc-500 hover:text-zinc-950 text-sm tracking-wider font-light transition-colors w-fit"
                 >
                   {link.label}
                 </Link>
@@ -66,18 +69,17 @@ export default function Footer() {
             </span>
             <div className="flex flex-col gap-3">
               <a
-                href="mailto:hello@avenore.com"
-                className="text-zinc-500 hover:text-zinc-950 text-xs tracking-wider font-light transition-colors w-fit border-b border-zinc-200 pb-0.5"
+              target="_blank"
+                href="mailto:info@avenorarchitects.com"
+                className="text-zinc-500 hover:text-zinc-950 text-sm tracking-wider font-light transition-colors w-fit border-b border-zinc-200 pb-0.5"
               >
-                hello@avenore.com
+                info@avenorarchitects.com
               </a>
-              <span className="text-zinc-500 text-xs tracking-wider font-light">
+              <span className="text-zinc-500 text-sm tracking-wider font-light">
                 +1 (202) 555-0199
               </span>
-              <p className="text-zinc-500 text-xs font-light leading-relaxed max-w-xs">
-                1200 Constitution Ave. NW
-                <br />
-                Washington, D.C. 20001
+              <p className="text-zinc-500 text-sm font-light leading-relaxed max-w-xs">
+                Dubai - United Arab Emirates
               </p>
             </div>
           </div>
@@ -86,80 +88,57 @@ export default function Footer() {
           <div className="lg:col-span-3 space-y-6">
             <div className="space-y-4">
               <span className="text-[10px] tracking-[0.25em] font-semibold text-zinc-400 uppercase block">
-                Journal
+                Social Media
               </span>
-              <p className="text-zinc-500 text-xs font-light leading-relaxed">
-                Subscribe to receive seasonal design and architectural insights.
-              </p>
-              <div className="flex items-center border-b border-zinc-200 pb-2 w-full max-w-xs">
-                <input
-                  type="email"
-                  placeholder="Email address"
-                  className="bg-transparent border-none outline-none text-xs w-full text-zinc-950 placeholder-zinc-400 font-light"
-                />
-                <button 
-                  className="text-zinc-500 hover:text-zinc-950 transition-colors pl-2"
-                  aria-label="Subscribe"
-                >
-                  →
-                </button>
-              </div>
+             
             </div>
 
             {/* Social Links Row */}
-            <div className="flex gap-4 pt-2">
-              {[
-                {
-                  label: "Instagram",
-                  href: "#",
-                  svg: (
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
-                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
-                    </svg>
-                  )
-                },
-                {
-                  label: "LinkedIn",
-                  href: "#",
-                  svg: (
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                      <rect width="4" height="12" x="2" y="9"/>
-                      <circle cx="4" cy="4" r="2"/>
-                    </svg>
-                  )
-                },
-                {
-                  label: "Facebook",
-                  href: "#",
-                  svg: (
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-                    </svg>
-                  )
-                },
-                {
-                  label: "Twitter / X",
-                  href: "#",
-                  svg: (
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/>
-                    </svg>
-                  )
-                }
-              ].map((social, idx) => (
-                <a
-                  key={idx}
-                  href={social.href}
-                  className="text-zinc-400 hover:text-zinc-950 transition-colors"
-                  aria-label={social.label}
-                >
-                  {social.svg}
-                </a>
-              ))}
-            </div>
+            <div className="flex gap-6 text-zinc-500">
+                      <a
+                        href="https://www.facebook.com/people/Avenor-Architects/61591632058501/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-black transition-colors"
+                        aria-label="Facebook"
+                      >
+                        <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                          <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                        </svg>
+                      </a>
+            
+                      <a
+                        href="https://www.instagram.com/avenor.architects"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-black transition-colors"
+                        aria-label="Instagram"
+                      >
+                        <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                      </a>
+            
+                      <a
+                        href="https://in.pinterest.com/avenorarchitects/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-black transition-colors"
+                        aria-label="Pinterest"
+                      >
+                        <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                          <path d="M12 0c-6.627 0-12 5.372-12 12 0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.342-.091.382-.294 1.199-.334 1.363-.053.218-.176.265-.406.157-1.518-.707-2.467-2.928-2.467-4.713 0-3.837 2.788-7.362 8.039-7.362 4.22 0 7.498 3.008 7.498 7.027 0 4.193-2.643 7.568-6.312 7.568-1.233 0-2.393-.641-2.79-1.395l-.76 2.898c-.276 1.054-1.025 2.376-1.525 3.189 1.125.347 2.316.535 3.552.535 6.627 0 12-5.373 12-12 0-6.628-5.373-12-12-12z"/>
+                        </svg>
+                      </a>
+            
+                      <a
+                        href="mailto:info@avenorarchitects.com"
+                        className="hover:text-black transition-colors"
+                        aria-label="Email"
+                      >
+                        <Mail className="w-4.5 h-4.5" strokeWidth={1.5} />
+                      </a>
+                    </div>
           </div>
         </div>
 
@@ -200,22 +179,11 @@ export default function Footer() {
               className="group flex items-center justify-center w-10 h-10 border border-zinc-200 hover:border-zinc-950 transition-colors duration-300 rounded-full"
               aria-label="Scroll to top"
             >
-              <svg
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+              <ArrowUp
+                size={12}
+                strokeWidth={1.5}
                 className="text-zinc-400 group-hover:text-zinc-950 transform group-hover:-translate-y-0.5 transition-all duration-300"
-              >
-                <path
-                  d="M6 10V2M6 2L2 6M6 2L10 6"
-                  stroke="currentColor"
-                  strokeWidth="1.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              />
             </button>
           </div>
         </div>

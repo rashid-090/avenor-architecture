@@ -7,6 +7,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
+import { blogsData } from "../lib/data";
 
 // Import Swiper styles
 import "swiper/css";
@@ -15,50 +16,20 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// Duplicated to support loop mode clones cleanly for 3-up desktop viewports
-const blogs = [
-  {
-    id: 1,
-    category: "Media",
-    title: "How an Avenore became a model for affordable, sustainable living",
-    image: "/blog_1.png",
-  },
-  {
-    id: 2,
-    category: "Announcements",
-    title: "2025 Design Awards Recap",
-    image: "/blog_2.png",
-  },
-  {
-    id: 3,
-    category: "Media",
-    title: "Industrial Luxury Style, explained by Avenore Design",
-    image: "/blog_3.png",
-  },
-  {
-    id: 4,
-    category: "Media",
-    title: "How an Avenore became a model for affordable, sustainable living",
-    image: "/blog_1.png",
-  },
-  {
-    id: 5,
-    category: "Announcements",
-    title: "2025 Design Awards Recap",
-    image: "/blog_2.png",
-  },
-  {
-    id: 6,
-    category: "Media",
-    title: "Industrial Luxury Style, explained by Avenore Design",
-    image: "/blog_3.png",
-  },
-];
-
-export default function BlogsSection() {
+export default function BlogsSection({ initialBlogs = [] }) {
   const containerRef = useRef(null);
   const swiperRef = useRef(null);
   const [activeSlide, setActiveSlide] = useState(0);
+
+  const [blogsList, setBlogsList] = useState(
+    initialBlogs && initialBlogs.length > 0 ? initialBlogs.slice(0, 6) : blogsData.slice(0, 6)
+  );
+
+  useEffect(() => {
+    if (initialBlogs && initialBlogs.length > 0) {
+      setBlogsList(initialBlogs.slice(0, 6));
+    }
+  }, [initialBlogs]);
 
   const handleDotClick = (index) => {
     if (swiperRef.current) {
@@ -77,7 +48,13 @@ export default function BlogsSection() {
             const overlay = card.querySelector(".reveal-overlay");
             const image = card.querySelector(".reveal-image img");
 
-            if (overlay && image) {
+            if (overlay) {
+              // Reset overlays to avoid GSAP positioning clashes on state updates
+              gsap.set(overlay, { yPercent: 0 });
+              if (image) {
+                gsap.set(image, { scale: 1.15 });
+              }
+
               const tl = gsap.timeline({
                 scrollTrigger: {
                   trigger: card,
@@ -90,12 +67,15 @@ export default function BlogsSection() {
                 yPercent: 101, // slide down to reveal top-to-bottom
                 duration: 1.3,
                 ease: "power3.inOut",
-              })
-              .fromTo(image,
-                { scale: 1.15 },
-                { scale: 1, duration: 1.5, ease: "power2.out" },
-                "-=1.2"
-              );
+              });
+
+              if (image) {
+                tl.fromTo(image,
+                  { scale: 1.15 },
+                  { scale: 1, duration: 1.5, ease: "power2.out" },
+                  "-=1.2"
+                );
+              }
             }
           });
         }
@@ -123,8 +103,8 @@ export default function BlogsSection() {
         </div>
         <div>
           <Link
-            href="#"
-            className="group flex items-center gap-1.5 text-zinc-950 font-medium text-xs md:text-sm tracking-wide border-b border-black pb-0.5 hover:opacity-85 transition-opacity"
+            href="/blogs"
+            className="group relative flex items-center gap-1.5 text-zinc-950 font-medium text-xs md:text-sm tracking-wide  pb-0.5 hover:opacity-85 transition-opacity"
           >
             Read all
             <svg
@@ -143,6 +123,8 @@ export default function BlogsSection() {
                 strokeLinejoin="round"
               />
             </svg>
+                            <span className="absolute bottom-0 left-0 h-[1px] w-full scale-x-0 bg-black transition-transform duration-300 ease-out origin-left group-hover:scale-x-100 group-hover:origin-left"></span>
+
           </Link>
         </div>
       </div>
@@ -175,9 +157,12 @@ export default function BlogsSection() {
           onSlideChange={(swiper) => setActiveSlide(swiper.realIndex)}
           className="blogs-swiper"
         >
-          {blogs.map((b) => (
-            <SwiperSlide key={b.id}>
-              <div className="flex flex-col group cursor-pointer w-full">
+          {blogsList.map((b, idx) => (
+            <SwiperSlide key={b.id || idx}>
+              <Link
+                href={`/blogs/${b.slug}`}
+                className="flex flex-col group cursor-pointer w-full"
+              >
                 {/* Image container with hidden vertical reveal overlay */}
                 <div className="blog-card-container relative aspect-[3/4] w-full overflow-hidden bg-zinc-100 mb-5">
                   {/* White overlay block that slides down */}
@@ -186,7 +171,7 @@ export default function BlogsSection() {
                   {/* Core Image */}
                   <div className="reveal-image w-full h-full relative">
                     <Image
-                      src={b.image}
+                      src={b.image || "/blog_1.png"}
                       alt={b.title}
                       fill
                       loading="lazy"
@@ -205,7 +190,7 @@ export default function BlogsSection() {
                     {b.title}
                   </h3>
                 </div>
-              </div>
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>
@@ -213,7 +198,7 @@ export default function BlogsSection() {
 
       {/* Clickable Pagination dots tracking active Swiper index */}
       <div className="w-full flex justify-center items-center gap-2 mt-12 z-20 relative">
-        {blogs.slice(0, 3).map((_, idx) => (
+        {blogsList.slice(0, Math.min(3, blogsList.length)).map((_, idx) => (
           <button
             key={idx}
             onClick={() => handleDotClick(idx)}

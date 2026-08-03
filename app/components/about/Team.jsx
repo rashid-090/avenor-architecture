@@ -67,7 +67,13 @@ export default function TeamSection() {
             const overlay = card.querySelector(".reveal-overlay");
             const image = card.querySelector(".reveal-image img");
 
-            if (overlay && image) {
+            if (overlay) {
+              // Reset overlays to avoid GSAP positioning clashes on state updates
+              gsap.set(overlay, { yPercent: 0 });
+              if (image) {
+                gsap.set(image, { scale: 1.15 });
+              }
+
               const tl = gsap.timeline({
                 scrollTrigger: {
                   trigger: card,
@@ -80,12 +86,15 @@ export default function TeamSection() {
                 yPercent: 101, // slide down to reveal top-to-bottom
                 duration: 1.3,
                 ease: "power3.inOut",
-              })
-              .fromTo(image,
-                { scale: 1.15 },
-                { scale: 1, duration: 1.5, ease: "power2.out" },
-                "-=1.2"
-              );
+              });
+
+              if (image) {
+                tl.fromTo(image,
+                  { scale: 1.15 },
+                  { scale: 1, duration: 1.5, ease: "power2.out" },
+                  "-=1.2"
+                );
+              }
             }
           });
         }
