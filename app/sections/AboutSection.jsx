@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Home, DraftingCompass, Armchair } from "lucide-react";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
 if (typeof window !== "undefined") {
@@ -193,9 +194,15 @@ export default function AboutSection() {
         {/* Carousel Slider */}
         <div ref={cardsRef} className="w-full">
           <Swiper
+            modules={[Autoplay]}
             spaceBetween={20}
             slidesPerView={1.2}
+            loop={true}
             grabCursor={true}
+            autoplay={{
+              delay: 3500,
+              disableOnInteraction: false,
+            }}
             breakpoints={{
               1024: {
                 slidesPerView: 3.1,

@@ -3,6 +3,7 @@ import About from "../components/about/About";
 import Values from "../components/about/Values";
 import Approch from "../components/about/Approch";
 import Team from "../components/about/Team";
+import Scrollservicelist from "../components/about/Scrollservicelist";
 
 export const metadata = {
   title: "About Our Architectural Design Studio | Avenore Architecture",
@@ -23,7 +24,8 @@ const page = () => {
     <div>
       <About />
       <Values />
-      <Approch />
+      <Scrollservicelist/>
+      {/* <Approch /> */}
       {/* <Team /> */}
     </div>
   );

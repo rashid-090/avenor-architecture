@@ -143,15 +143,15 @@ export default function ContactForm() {
                 <a
                   href="mailto:info@avenorarchitects.com"
                   target="_blank"
-                  className="text-zinc-950 font-normal text-sm md:text-base border-b border-zinc-950 w-fit pb-0.5 hover:opacity-80 transition-opacity"
+                  className="text-zinc-500 hover:text-main font-normal text-sm md:text-lg  w-fit pb-0.5 hover:opacity-80 transition-opacity"
                 >
                   	info@avenorarchitects.com
                 </a>
                 <a
-                  href="tel:+12030405010"
-                  className="text-zinc-950 font-normal text-sm md:text-base hover:opacity-80 transition-opacity w-fit"
+                  href="tel:+971506911786"
+                  className="text-zinc-500 hover:text-main font-normal text-sm md:text-lg hover:opacity-80 transition-opacity w-fit"
                 >
-                  +1 2030 4050 10
+                  +971 50 6911786
                 </a>
               </div>
             </div>
@@ -276,10 +276,14 @@ export default function ContactForm() {
                     }`}
                   >
                     <option value="" disabled>Select a service</option>
-                    <option value="construction">Construction</option>
+                    <option value="Architecture">Architecture</option>
                     <option value="interior-design">Interior design</option>
-                    <option value="residential-architecture">Residential Architecture</option>
-                    <option value="commercial-architecture">Commercial Architecture</option>
+                    <option value="Landscape Design">Landscape Design</option>
+                    <option value="Site Supervision">Site Supervision</option>
+                    <option value="Project Management">Project Management</option>
+                    <option value="Technical Drawing">Technical Drawing</option>
+                    <option value="Scale Model">Scale Model</option>
+                    <option value="Interior Fit-Out">Interior Fit-Out</option>
                   </select>
                   {/* Select custom arrow */}
                   <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-500">
