@@ -15,46 +15,46 @@ if (typeof window !== "undefined") {
 
 const servicesList = [
   {
-    title: "Architecture",
+    title: "Architecture Design",
     img: "./service/Architecture.svg",
     description:
-      "We create functional and inspiring architectural designs that blend creativity, sustainability, and timeless aesthetics.",
+      "Thoughtful architectural solutions shaped around each client’s vision, context, function, and long-term objectives.",
   },
   {
     title: "Interior Design",
     img: "./service/Interior-Design.svg",
     description:
-      "Thoughtfully designed interiors that balance comfort, style, and functionality to reflect your lifestyle and vision.",
+      "Interior environments that balance aesthetics, functionality, materiality, and experience.",
   },
   {
     title: "Landscape Design",
     img: "./service/Landscape.svg",
     description:
-      "Beautiful outdoor spaces designed to complement architecture while enhancing nature, usability, and everyday living.",
+      "Landscape solutions that respond to site, climate, context, and the relationship between architecture and nature.",
   },
   {
     title: "Site Supervision",
     img: "./service/Site-Supervision.svg",
     description:
-      "Professional site supervision to ensure every detail is executed with quality, accuracy, and adherence to design.",
+      "Careful oversight to ensure design intent, quality, coordination, and execution remain aligned.",
   },
   {
     title: "Project Management",
     img: "./service/Project-Management.svg",
     description:
-      "End-to-end project coordination that keeps construction on schedule, within budget, and aligned with your goals.",
+      "Structured coordination across design, consultants, contractors, procurement, construction, and delivery.",
   },
   {
     title: "Technical Drawing",
     img: "./service/Technical-Drawing.svg",
     description:
-      "Detailed architectural drawings that provide precise guidance for smooth construction and seamless project execution.",
+      "Comprehensive technical documentation translating architectural ideas into coordinated, buildable solutions.",
   },
   {
     title: "Scale Model",
     img: "./service/Scale-Model.svg",
     description:
-      "Realistic architectural scale models that help visualize the design, proportions, and spatial relationships before construction.",
+      "Detailed physical models that communicate architectural form, spatial relationships, landscape, and design intent.",
   },
   {
     title: "Interior Fit-Out",
@@ -147,9 +147,7 @@ export default function AboutSection() {
             WHO WE ARE
           </p>
           <h2 className="text-zinc-900 text-2xl md:text-[34px] lg:text-[38px] font-normal leading-[1.3] tracking-tight">
-            Avenore Architects is an award-winning modern architecture firm
-            based in UAE. We specialize in contemporary design through our
-            signature Natural Modern approach.
+            At <span className="font-medium">Avenor Architects</span>, we believe that every space tells a story. Our dedicated team of architects and designers is committed to transforming spaces through creativity, precision, and innovation.
           </h2>
         </div>
         <div ref={linkRef} className="flex-shrink-0 md:mb-2">

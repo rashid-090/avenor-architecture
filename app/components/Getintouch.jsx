@@ -45,10 +45,10 @@ export default function GetInTouchSection() {
         {/* Left Side Info */}
         <div className="max-w-xl">
           <span className="text-[10px] md:text-xs font-medium tracking-[0.25em] text-white/60 block mb-3 uppercase">
-            A UNIQUE VISION WITH UNLIMITED POSSIBILITIES
+            Architecture, Interiors, Expertise And Execution.
           </span>
           <h2 className="text-white text-3xl md:text-5xl font-light tracking-tight leading-none">
-            Let&apos;s work together
+            Let’s Connect
           </h2>
         </div>
 

@@ -9,30 +9,31 @@ const slides = [
   {
     id: 0,
     image: "/banner1.webp",
-    tag: "FEATURED PROJECT / 2024",
-    title: "Kaave Academy",
-    subtitle: "Beyond Architecture. Creating Experiences.",
-    link: "#portfolio",
+    tag: "Residential / Ajman, UAE",
+    title: "Al Noor Villa",
+    subtitle: "A contemporary UAE villa blending desert-inspired elegance, clean geometry, premium materials, and lush landscaping to create a luxurious yet welcoming family home.",
+    link: "/projects",
     linkText: "View project",
   },
   {
     id: 1,
     image: "/banner2.webp",
-    tag: "RESIDENTIAL / 2024",
-    title: "Desert Haven Villa",
-    subtitle: "Where Solitude Meets Sublime Design.",
-    link: "#portfolio",
+    tag: "Residential / Ajman, UAE",
+    title: "Al Noor Villa",
+    subtitle: "A contemporary UAE villa blending desert-inspired elegance, clean geometry, premium materials, and lush landscaping to create a luxurious yet welcoming family home.",
+    link: "/projects",
     linkText: "View project",
   },
   {
     id: 2,
     image: "/banner3.webp",
-    tag: "CIVIC / 2023",
-    title: "Forma Cultural Center",
-    subtitle: "Architecture as Living Art.",
-    link: "#portfolio",
+    tag: "Residential / Ajman, UAE",
+    title: "Al Noor Villa",
+    subtitle: "A contemporary UAE villa blending desert-inspired elegance, clean geometry, premium materials, and lush landscaping to create a luxurious yet welcoming family home.",
+    link: "/projects",
     linkText: "View project",
   },
+
 ];
 
 // Split title chars into animated spans
@@ -242,7 +243,7 @@ export default function HeroBannerSlider() {
         <div className="px-6 md:px-10 pb-8 flex items-end justify-between">
           <p
             ref={subtitleRef}
-            className="text-white/80 text-sm md:text-2xl font-medium tracking-wide max-w-xl"
+            className="text-white/80 text-sm md:text-lg tracking-wide max-w-xl"
           >
             {slide.subtitle}
           </p>

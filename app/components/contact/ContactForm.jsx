@@ -125,7 +125,7 @@ export default function ContactForm() {
             <h1 className="text-zinc-900 text-4xl md:text-[50px] font-normal leading-[1.1] tracking-tight">
               Get in touch
             </h1>
-            <p className="text-zinc-500 text-sm md:text-[15px] font-light leading-relaxed">
+            <p className="text-zinc-500 text-sm md:text-[15px] font-light leading-relaxed xl:pr-10">
               Don’t hesitate to get in touch with Avenore if you want to find out
               about design services that incorporate luxurious living and
               timeless interiors.
@@ -399,7 +399,7 @@ export default function ContactForm() {
       </div>
       {/* Toast Notification */}
       {toast.show && (
-        <div className={`fixed bottom-8 right-8 z-50 flex items-center gap-3 px-5 py-4 border text-sm font-light shadow-2xl transition-all duration-300 transform translate-y-0 animate-fade-in ${
+        <div className={`fixed bottom-5 right-8 z-50 flex items-center gap-3 px-5 py-4 border text-sm font-light shadow-2xl transition-all duration-300 transform translate-y-0 animate-fade-in ${
           toast.type === "success"
             ? "bg-zinc-900/95 border-zinc-700 text-white"
             : "bg-red-950/95 border-red-800 text-red-100"

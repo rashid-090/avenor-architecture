@@ -43,7 +43,7 @@ export default function Footer() {
               />
             </div>
             <p className="text-zinc-500 text-sm font-light max-w-sm leading-relaxed">
-              Crafting premium site-specific modern residences and structures that frame the natural landscape.
+Architecture, interiors, technical detailing, fit-out coordination, and project execution shaped through collaboration, responsibility, and precision.
             </p>
           </div>
 

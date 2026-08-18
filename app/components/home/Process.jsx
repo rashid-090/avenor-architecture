@@ -7,19 +7,19 @@ import Link from "next/link";
 
 const steps = [
   {
-    title: "Listen & Collaborate",
+    title: "Client Engagement",
     description:
-      "The success of Avenore projects is rooted in strong relationships and true collaboration. Through our process, we learn how our clients live day to day and translate those insights into a tailored vision—designing spaces that reflect and support their lives.",
+      "We begin by aligning our expertise with your unique vision, objectives, operational needs, and long-term goals.",
   },
   {
-    title: "Envision & Design",
+    title: "Design Development + Construction Documentation",
     description:
-      "We translate ideas into architectural realities. By exploring form, material, and spatial flow, we craft design concepts that respond uniquely to the surrounding landscape and client aspirations.",
+      "We evolve initial concepts into refined, high-fidelity architectural solutions and translate the final design into comprehensive technical documentation.",
   },
   {
-    title: "Partner & Build",
+    title: "Tender, Construction & Completion",
     description:
-      "We partner with premier builders and craftsmen to realize our designs with precision. From construction oversight to final handover, we ensure every detail is executed to the highest standards.",
+      "We support tender and procurement, construction administration, coordination, quality control, and final project completion.",
   },
 ];
 

@@ -10,24 +10,24 @@ if (typeof window !== "undefined") {
 
 const stats = [
   {
-    target: 10,
+    target: 7,
     suffix: "+",
-    label: "Years of experience",
+    label: "Core Services",
   },
   {
-    target: 200,
+    target: 8,
     suffix: "+",
-    label: "Residential Projects Completed",
+    label: "Approach Principles",
   },
   {
-    target: 100,
+    target: 6,
     suffix: "+",
-    label: "Commercial Spaces Transformed",
+    label: "Workflow Stages",
   },
   {
-    target: 400,
+    target: 5,
     suffix: "+",
-    label: "Serving Clients Nationwide",
+    label: "Signature Projects",
   },
 ];
 
