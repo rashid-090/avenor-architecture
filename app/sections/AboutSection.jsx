@@ -142,12 +142,12 @@ export default function AboutSection() {
     >
       {/* WHO WE ARE Section */}
       <div className=" w-[95%] mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-20">
-        <div ref={textRevealRef} className="max-w-3xl">
+        <div ref={textRevealRef} className="xl:max-w-4xl">
           <p className="text-[11px] uppercase tracking-[0.25em] text-zinc-500 font-semibold mb-6">
             WHO WE ARE
           </p>
-          <h2 className="text-zinc-900 text-2xl md:text-[34px] lg:text-[38px] font-normal leading-[1.3] tracking-tight">
-            At <span className="font-medium">Avenor Architects</span>, we believe that every space tells a story. Our dedicated team of architects and designers is committed to transforming spaces through creativity, precision, and innovation.
+          <h2 className="text-zinc-900 text-2xl md:text-[34px] lg:text-[38px] font-normal leading-[1.3] ">
+We look at architecture beyond plans and elevations, focusing on how a space is lived in-its light, proportions, materials, movement, and details. Our work combines clear design thinking with a strong sense of context, creating functional, distinctive spaces with their own identity.
           </h2>
         </div>
         <div ref={linkRef} className="flex-shrink-0 md:mb-2">

@@ -107,11 +107,9 @@ export default function About() {
               Elevating architecture with lasting quality and modern vision
             </h2>
             <p className="about-body text-zinc-500 text-sm md:text-[15px] font-light leading-relaxed max-w-lg">
-              Avenore was founded out of a shared desire to create spaces that
-              feel as good as they look — honest, balanced, and deeply personal.
-              With a foundation in architecture and product design, the studio
-              connects people to their environments through refined, purposeful
-              design.
+              we look at architecture beyond plans and elevations. We pay attention to how a space is lived in  the light, proportions, materials, movement, and small details that shape the experience.<br className="hidden md:block"/>
+
+Our work is grounded in clear design thinking and a strong sense of context. We keep things considered, functional, and visually distinct, creating spaces that have their own identity rather than following a formula.
             </p>
           </div>
 
