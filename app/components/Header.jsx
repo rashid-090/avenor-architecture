@@ -11,7 +11,7 @@ const navLinks = [
   { label: "Projects", href: "/projects" },
   { label: "Scale Models", href: "/scale-models" },
   { label: "Services", href: "/services" },
-  { label: "Blogs", href: "/blogs" },
+  // { label: "Blogs", href: "/blogs" },
 ];
 
 export default function Header() {

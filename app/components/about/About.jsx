@@ -15,8 +15,12 @@ export default function About() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // --- Image reveal: white overlay slides down to reveal ---
-      const overlay = sectionRef.current?.querySelector(".about-reveal-overlay");
-      const image = sectionRef.current?.querySelector(".about-reveal-image img");
+      const overlay = sectionRef.current?.querySelector(
+        ".about-reveal-overlay",
+      );
+      const image = sectionRef.current?.querySelector(
+        ".about-reveal-image img",
+      );
 
       if (overlay) {
         // Reset overlay to avoid GSAP positioning issues
@@ -44,7 +48,7 @@ export default function About() {
             image,
             { scale: 1.15 },
             { scale: 1, duration: 1.6, ease: "power2.out" },
-            "-=1.2"
+            "-=1.2",
           );
         }
       }
@@ -67,7 +71,7 @@ export default function About() {
               start: "top 85%",
               toggleActions: "play none none none",
             },
-          }
+          },
         );
       }
 
@@ -86,7 +90,7 @@ export default function About() {
               start: "top 85%",
               toggleActions: "play none none none",
             },
-          }
+          },
         );
       }
     }, sectionRef);
@@ -95,21 +99,19 @@ export default function About() {
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className="bg-white text-zinc-950 py-16 md:py-24"
-    >
+    <section ref={sectionRef} className="bg-white text-zinc-950 py-16 md:py-24">
       <div className="w-[95%] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left — Text Content */}
           <div className="flex flex-col justify-center order-2 lg:order-1">
             <h2 className="about-heading text-zinc-900 text-2xl md:text-[34px] lg:text-[40px] font-normal leading-[1.25] tracking-tight mb-8">
-              Elevating architecture with lasting quality and modern vision
+              About Avenor
             </h2>
             <p className="about-body text-zinc-500 text-sm md:text-[15px] font-light leading-relaxed max-w-lg">
-              we look at architecture beyond plans and elevations. We pay attention to how a space is lived in  the light, proportions, materials, movement, and small details that shape the experience.<br className="hidden md:block"/>
-
-Our work is grounded in clear design thinking and a strong sense of context. We keep things considered, functional, and visually distinct, creating spaces that have their own identity rather than following a formula.
+             At AVENOR Architects, we believe that good design begins with understanding. We take the time to listen to our clients, understand the site, the people, and the purpose behind every project before turning ideas into meaningful spaces. Our work brings together architecture, interiors, technical detailing, and project execution, always balancing creativity with functionality.
+            </p>
+            <p className="about-body text-zinc-500 text-sm md:text-[15px] font-light leading-relaxed max-w-lg">
+Our journey is built on a simple belief: every project deserves its own identity. We don't follow a fixed style or create spaces just to look impressive. Instead, we focus on thoughtful design, attention to detail, and solutions that feel natural, purposeful, and built to last. At AVENOR, we create spaces that people can connect with, enjoy, and remember — shaped with intention and built to endure.
             </p>
           </div>
 
@@ -122,7 +124,7 @@ Our work is grounded in clear design thinking and a strong sense of context. We 
               {/* Core image */}
               <div className="about-reveal-image w-full h-full relative">
                 <Image
-                  src="/abt1.webp"
+                  src="/abt_ban.webp"
                   alt="Architect reviewing blueprints at studio"
                   fill
                   priority

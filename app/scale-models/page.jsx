@@ -4,15 +4,15 @@ import { client, urlFor } from "../lib/sanity";
 import LoadingScreen from "../components/common/LoadingScreen";
 
 export const metadata = {
-  title: "Architectural Scale Models & Maquettes | Avenore Architecture",
-  description: "Explore Avenore Architecture's collection of precision physical scale models, urban planning maquettes, and 3D architectural prototypes.",
+  title: "Architectural Scale Models & Maquettes | Avenor Architects",
+  description: "Explore Avenor Architects's collection of precision physical scale models, urban planning maquettes, and 3D architectural prototypes.",
   alternates: {
-    canonical: "https://avenore.com/scale-models",
+    canonical: "https://avenorarchitects.com/scale-models",
   },
   openGraph: {
-    title: "Architectural Scale Models & Maquettes | Avenore Architecture",
-    description: "Explore Avenore Architecture's collection of precision physical scale models, urban planning maquettes, and 3D architectural prototypes.",
-    url: "https://avenore.com/scale-models",
+    title: "Architectural Scale Models & Maquettes | Avenor Architects",
+    description: "Explore Avenor Architects's collection of precision physical scale models, urban planning maquettes, and 3D architectural prototypes.",
+    url: "https://avenorarchitects.com/scale-models",
     type: "website",
   }
 };
@@ -25,6 +25,7 @@ export default async function ScaleModelsPage() {
       title,
       "slug": slug.current,
       type,
+      cardImage,
       image,
       scale,
       aspectClass
@@ -36,7 +37,8 @@ export default async function ScaleModelsPage() {
         slug: item.slug || `scale-model-${idx}`,
         title: item.title || "",
         type: item.type || "Scale Model",
-        image: item.image ? urlFor(item.image).url() : "",
+        cardImage: (item.cardImage && item.cardImage.asset) ? urlFor(item.cardImage).url() : "",
+        image: (item.image && item.image.asset) ? urlFor(item.image).url() : "",
         scale: item.scale || "",
         aspectClass: item.aspectClass || "aspect-[3/4]"
       }));

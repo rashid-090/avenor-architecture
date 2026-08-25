@@ -10,15 +10,15 @@ import LoadingScreen from "./components/LoadingScreen";
 import { client, urlFor } from "./lib/sanity";
 
 export const metadata = {
-  title: "Avenore Architecture | Beyond Architecture. Creating Experiences.",
-  description: "Avenore Architecture is an award-winning architecture and interior design studio crafting timeless, sustainable private residences and premium commercial layouts globally.",
+  title: "Avenor Architects | Beyond Architecture. Creating Experiences.",
+  description: "Avenor Architects is an award-winning architecture and interior design studio crafting timeless, sustainable private residences and premium commercial layouts globally.",
   alternates: {
-    canonical: "https://avenore.com",
+    canonical: "https://avenorarchitects.com",
   },
   openGraph: {
-    title: "Avenore Architecture | Beyond Architecture. Creating Experiences.",
-    description: "Avenore Architecture is an award-winning architecture and interior design studio crafting timeless, sustainable private residences and premium commercial layouts globally.",
-    url: "https://avenore.com",
+    title: "Avenor Architects | Beyond Architecture. Creating Experiences.",
+    description: "Avenor Architects is an award-winning architecture and interior design studio crafting timeless, sustainable private residences and premium commercial layouts globally.",
+    url: "https://avenorarchitects.com",
     type: "website",
   }
 };
@@ -42,6 +42,7 @@ export default async function Home() {
         _id,
         title,
         "slug": slug.current,
+        cardImage,
         image
       }`, {}, { next: { revalidate: 10 } }),
       client.fetch(`*[_type == "blog"]|order(date desc)[0...6] {
@@ -69,13 +70,22 @@ export default async function Home() {
 
     if (scaleModelsData && scaleModelsData.length > 0) {
       sanityScaleModels = scaleModelsData.map((item, idx) => {
-        const imgUrl = (item.image && item.image.asset) ? urlFor(item.image).url() : "/scale_model_1.png";
+        const mainImgUrl = (item.image && item.image.asset)
+          ? urlFor(item.image).url()
+          : (item.cardImage && item.cardImage.asset)
+          ? urlFor(item.cardImage).url()
+          : "/scale_model_1.png";
+        const cardImgUrl = (item.cardImage && item.cardImage.asset)
+          ? urlFor(item.cardImage).url()
+          : mainImgUrl;
         return {
           id: item._id || idx.toString(),
           slug: item.slug || "",
           title: item.title || "",
-          image: imgUrl,
-          src: imgUrl
+          mainImage: mainImgUrl,
+          cardImage: cardImgUrl,
+          image: mainImgUrl,
+          src: mainImgUrl
         };
       });
     }
@@ -117,7 +127,7 @@ export default async function Home() {
       <Process />
 
       {/* Media & Press Blogs Section */}
-      <Blogs initialBlogs={sanityBlogs} />
+      {/* <Blogs initialBlogs={sanityBlogs} /> */}
 
     
     </>

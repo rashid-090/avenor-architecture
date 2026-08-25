@@ -12,9 +12,12 @@ const urbanist = Urbanist({
 });
 
 export const metadata = {
-  title: "Avenore Architecture — Beyond Architecture. Creating Experiences.",
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+  ),
+  title: "Avenor Architects — Beyond Architecture. Creating Experiences.",
   description:
-    "Avenore Architecture is an award-winning studio crafting iconic spaces that blend artistry with precision. Explore our portfolio of featured projects.",
+    "Avenor Architects is an award-winning studio crafting iconic spaces that blend artistry with precision. Explore our portfolio of featured projects.",
   keywords: [
     "architecture",
     "design",
@@ -85,7 +88,7 @@ export const metadata = {
     ],
   },
   openGraph: {
-    title: "Avenore Architecture",
+    title: "Avenor Architects",
     description: "Beyond Architecture. Creating Experiences.",
     type: "website",
     images: [
@@ -93,7 +96,7 @@ export const metadata = {
         url: "/averon-metalogo.webp",
         width: 1200,
         height: 630,
-        alt: "Avenore Architecture Logo",
+        alt: "Avenor Architects Logo",
       },
     ],
   },

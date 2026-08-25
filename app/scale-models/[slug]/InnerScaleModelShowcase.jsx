@@ -105,7 +105,7 @@ export default function InnerScaleModelShowcase({ scaleModel, related = [] }) {
       {/* Top Header Label & Title */}
       <div className="pt-24 md:pt-32 mb-10">
         <span className="text-[11px] uppercase tracking-[0.25em] text-zinc-400 font-semibold block mb-3">
-          {scaleModel.scale} • {scaleModel.type?.toUpperCase()}
+           {scaleModel.type?.toUpperCase()}
         </span>
         <h1 className="text-zinc-900 text-4xl md:text-[50px] lg:text-[55px] font-normal leading-none tracking-tight">
           {scaleModel.title}
@@ -133,23 +133,23 @@ export default function InnerScaleModelShowcase({ scaleModel, related = [] }) {
       <div className="grid grid-cols-2 md:grid-cols-5 gap-8 border-b border-zinc-100 pb-16 mb-24 text-sm font-light">
         <div>
           <span className="text-zinc-400 block mb-2 font-normal text-xs uppercase tracking-wider">Scale Ratio</span>
-          <span className="text-zinc-950 font-normal text-base">{scaleModel.scale}</span>
+          <span className="text-zinc-950 font-normal text-base">{scaleModel?.scale || "Not Available"}</span>
         </div>
         <div>
           <span className="text-zinc-400 block mb-2 font-normal text-xs uppercase tracking-wider">Materials</span>
-          <span className="text-zinc-950 font-normal text-base">{scaleModel.materials}</span>
+          <span className="text-zinc-950 font-normal text-base">{scaleModel?.materials || "Not Available"}</span>
         </div>
         <div>
           <span className="text-zinc-400 block mb-2 font-normal text-xs uppercase tracking-wider">Location</span>
-          <span className="text-zinc-950 font-normal text-base">{scaleModel.location}</span>
+          <span className="text-zinc-950 font-normal text-base">{scaleModel?.location || "Not Available"}</span>
         </div>
         <div>
           <span className="text-zinc-400 block mb-2 font-normal text-xs uppercase tracking-wider">Year</span>
-          <span className="text-zinc-950 font-normal text-base">{scaleModel.year}</span>
+          <span className="text-zinc-950 font-normal text-base">{scaleModel?.year || "Not Available"}</span>
         </div>
         <div>
           <span className="text-zinc-400 block mb-2 font-normal text-xs uppercase tracking-wider">Model Maker</span>
-          <span className="text-zinc-950 font-normal text-base">{scaleModel.architect}</span>
+          <span className="text-zinc-950 font-normal text-base">{scaleModel?.architect || "Not Available"}</span>
         </div>
       </div>
 
@@ -158,7 +158,7 @@ export default function InnerScaleModelShowcase({ scaleModel, related = [] }) {
         {/* Left Column: Giant headline */}
         <div className="lg:col-span-5">
           <h2 className="text-zinc-900 text-2xl md:text-[32px] font-normal leading-[1.3] tracking-tight">
-            {scaleModel.headline}
+            {scaleModel?.headline || "Not Available"}
           </h2>
         </div>
 
@@ -176,7 +176,7 @@ export default function InnerScaleModelShowcase({ scaleModel, related = [] }) {
 
       {/* Swiper Carousel Scale Model Gallery */}
       {displayGallery.length > 0 && (
-        <div className="mb-24">
+        <div className="mb-24 overflow-hidden">
           <div className="flex items-center justify-between mb-8 border-b border-zinc-100 pb-4">
             <span className="text-[11px] uppercase tracking-[0.25em] text-zinc-400 font-semibold block">
               MODEL GALLERY

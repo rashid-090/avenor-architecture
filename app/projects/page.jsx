@@ -3,15 +3,15 @@ import PortfolioList from "../components/project/PortfolioList";
 import { client, urlFor } from "../lib/sanity";
 
 export const metadata = {
-  title: "Featured Architecture & Design Portfolio | Avenore Architecture",
-  description: "Explore Avenore Architecture's portfolio of private luxury residences, high-end commercial spaces, and premium interior design projects.",
+  title: "Featured Architecture & Design Portfolio | Avenor Architects",
+  description: "Explore Avenor Architects's portfolio of private luxury residences, high-end commercial spaces, and premium interior design projects.",
   alternates: {
-    canonical: "https://avenore.com/projects",
+    canonical: "https://avenorarchitects.com/projects",
   },
   openGraph: {
-    title: "Featured Architecture & Design Portfolio | Avenore Architecture",
-    description: "Explore Avenore Architecture's portfolio of private luxury residences, high-end commercial spaces, and premium interior design projects.",
-    url: "https://avenore.com/projects",
+    title: "Featured Architecture & Design Portfolio | Avenor Architects",
+    description: "Explore Avenor Architects's portfolio of private luxury residences, high-end commercial spaces, and premium interior design projects.",
+    url: "https://avenorarchitects.com/projects",
     type: "website",
   }
 };

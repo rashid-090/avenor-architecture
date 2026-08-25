@@ -3,15 +3,15 @@ import ContactForm from "../components/contact/ContactForm";
 import Map from "../components/contact/Map";
 
 export const metadata = {
-  title: "Contact Avenore Architecture | Book a Design Consultation",
-  description: "Contact Avenore Architecture to discuss your next construction, interior design, or residential architecture project. Book a free consultation with our design directors.",
+  title: "Contact Avenor Architects | Book a Design Consultation",
+  description: "Contact Avenor Architects to discuss your next construction, interior design, or residential architecture project. Book a free consultation with our design directors.",
   alternates: {
-    canonical: "https://avenore.com/contact",
+    canonical: "https://avenorarchitects.com/contact",
   },
   openGraph: {
-    title: "Contact Avenore Architecture | Book a Design Consultation",
-    description: "Contact Avenore Architecture to discuss your next construction, interior design, or residential architecture project. Book a free consultation with our design directors.",
-    url: "https://avenore.com/contact",
+    title: "Contact Avenor Architects | Book a Design Consultation",
+    description: "Contact Avenor Architects to discuss your next construction, interior design, or residential architecture project. Book a free consultation with our design directors.",
+    url: "https://avenorarchitects.com/contact",
     type: "website",
   }
 };

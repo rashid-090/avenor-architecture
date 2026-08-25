@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Parallax } from "swiper/modules";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
+import { client, urlFor } from "../../lib/sanity";
 
 // Import Swiper styles
 import "swiper/css";
@@ -45,6 +46,45 @@ export default function ProjectShowcase({ initialScaleModels = [] }) {
   React.useEffect(() => {
     if (initialScaleModels && initialScaleModels.length > 0) {
       setModelsList(initialScaleModels.slice(0, 6));
+    } else {
+      client
+        .fetch(
+          `*[_type == "scaleModel"]|order(orderRank asc)[0...6] {
+            _id,
+            title,
+            "slug": slug.current,
+            type,
+            cardImage,
+            image
+          }`
+        )
+        .then((data) => {
+          if (data && data.length > 0) {
+            const mapped = data.map((item, idx) => {
+              const mainImgUrl = (item.image && item.image.asset)
+                ? urlFor(item.image).url()
+                : (item.cardImage && item.cardImage.asset)
+                ? urlFor(item.cardImage).url()
+                : "/scale_model_1.png";
+              return {
+                id: item._id || idx.toString(),
+                slug: item.slug || "",
+                title: item.title || "",
+                type: item.type || "",
+                mainImage: mainImgUrl,
+                image: mainImgUrl,
+                src: mainImgUrl,
+              };
+            });
+            setModelsList(mapped);
+          } else {
+            setModelsList(projects);
+          }
+        })
+        .catch((err) => {
+          console.error("Error fetching scale models in Showcase:", err);
+          setModelsList(projects);
+        });
     }
   }, [initialScaleModels]);
 
@@ -99,7 +139,7 @@ export default function ProjectShowcase({ initialScaleModels = [] }) {
           onSlideChange={(swiper) => setActiveSlide(swiper.realIndex)}
           className="showcase-swiper h-[60vh] sm:h-[80vh] w-full"
         >
-          {modelsList.map((project, index) => {
+          {modelsList?.slice(0,4)?.map((project, index) => {
             const slideContent = (
               <div className="relative w-full h-full">
                 {/* Image with Swiper Parallax (horizontal) & Framer Motion (vertical) attributes */}
@@ -112,7 +152,7 @@ export default function ProjectShowcase({ initialScaleModels = [] }) {
                     className="relative w-full h-[124%] -top-[12%]"
                   >
                     <Image
-                      src={project.src || project.image || "/scale_model_1.png"}
+                      src={project.mainImage || project.image || project.src || "/scale_model_1.png"}
                       alt={project.title}
                       fill
                       priority={index === 0}

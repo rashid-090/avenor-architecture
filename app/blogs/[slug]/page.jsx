@@ -45,7 +45,7 @@ async function getPost(slug) {
         slug: data.slug || "",
         title: data.title || "",
         category: data.category || "Media",
-        author: data.author || "Avenore Editors",
+        author: data.author || "Avenor Architects",
         image: data.image ? urlFor(data.image).url() : "",
         excerpt: data.excerpt || "",
         headline: data.headline || "",
@@ -93,7 +93,7 @@ async function getRelatedPosts(currentSlug) {
           slug: item.slug || `blog-${idx}`,
           title: item.title || "",
           category: item.category || "Media",
-          author: item.author || "Avenore Editors",
+          author: item.author || "Avenor Architects",
           image: item.image ? urlFor(item.image).url() : "",
           excerpt: item.excerpt || "",
           headline: item.headline || "",
@@ -115,15 +115,15 @@ export async function generateMetadata({ params }) {
   if (!post) return {};
 
   return {
-    title: `${post.title} — Insights & Media | Avenore Architecture`,
+    title: `${post.title} — Insights & Media | Avenor Architects`,
     description: post.excerpt || `Read our perspective and expert analysis on ${post.title}.`,
     alternates: {
-      canonical: `https://avenore.com/blogs/${slug}`,
+      canonical: `https://avenorarchitects.com/blogs/${slug}`,
     },
     openGraph: {
-      title: `${post.title} — Insights & Media | Avenore Architecture`,
+      title: `${post.title} — Insights & Media | Avenor Architects`,
       description: post.excerpt || `Read our perspective and expert analysis on ${post.title}.`,
-      url: `https://avenore.com/blogs/${slug}`,
+      url: `https://avenorarchitects.com/blogs/${slug}`,
       type: "article",
       images: post.image
         ? [

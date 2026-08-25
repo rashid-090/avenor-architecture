@@ -51,21 +51,55 @@ async function getProject(slug) {
   return portfolioProjects.find((p) => p.slug === slug);
 }
 
+async function getRelatedProjects(currentSlug) {
+  try {
+    const query = `*[_type == "project" && slug.current != $currentSlug]|order(orderRank asc)[0...4] {
+      _id,
+      title,
+      "slug": slug.current,
+      "type": projectType,
+      cardThumbImage,
+      mainImage,
+      location,
+      year
+    }`;
+    const data = await client.fetch(query, { currentSlug }, { next: { revalidate: 10 } });
+    if (data && data.length > 0) {
+      return data.map((item, idx) => ({
+        id: item._id || idx.toString(),
+        slug: item.slug || `project-${idx}`,
+        title: item.title || "",
+        type: item.type || "Project",
+        image: (item.cardThumbImage && item.cardThumbImage.asset)
+          ? urlFor(item.cardThumbImage).url()
+          : (item.mainImage && item.mainImage.asset)
+          ? urlFor(item.mainImage).url()
+          : "",
+        location: item.location || "",
+        year: item.year || ""
+      }));
+    }
+  } catch (err) {
+    console.error("Error fetching related projects from Sanity:", err);
+  }
+  return [];
+}
+
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const project = await getProject(slug);
   if (!project) return {};
 
   return {
-    title: `${project.title} — Featured Project | Avenore Architecture`,
-    description: project.headline || `Explore details, design blueprints, photos, and creative processes of ${project.title}, a premier design by Avenore Architecture.`,
+    title: `${project.title} — Featured Project | Avenor Architects`,
+    description: project.headline || `Explore details, design blueprints, photos, and creative processes of ${project.title}, a premier design by Avenor Architects.`,
     alternates: {
-      canonical: `https://avenore.com/projects/${slug}`,
+      canonical: `https://avenorarchitects.com/projects/${slug}`,
     },
     openGraph: {
-      title: `${project.title} — Featured Project | Avenore Architecture`,
-      description: project.headline || `Explore details, design blueprints, photos, and creative processes of ${project.title}, a premier design by Avenore Architecture.`,
-      url: `https://avenore.com/projects/${slug}`,
+      title: `${project.title} — Featured Project | Avenor Architects`,
+      description: project.headline || `Explore details, design blueprints, photos, and creative processes of ${project.title}, a premier design by Avenor Architects.`,
+      url: `https://avenorarchitects.com/projects/${slug}`,
       type: "article",
       images: project.image
         ? [
@@ -102,9 +136,11 @@ export default async function ProjectDetailPage({ params }) {
     notFound();
   }
 
+  const related = await getRelatedProjects(slug);
+
   return (
     <main className="bg-white text-zinc-950 min-h-screen">
-      <InnerProjectShowcase project={project} />
+      <InnerProjectShowcase project={project} related={related} />
     </main>
   );
 }

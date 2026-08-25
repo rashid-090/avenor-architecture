@@ -122,7 +122,7 @@ export default function LoadingScreen({ variant = "screen" }) {
     <div className="min-h-screen bg-white text-zinc-950 flex flex-col items-center justify-center font-light text-sm animate-pulse">
       <div className="relative w-10 h-10 border-2 border-zinc-200 border-t-zinc-950 rounded-full animate-spin mb-4" />
       <span className="tracking-[0.15em] uppercase text-[10px] text-zinc-400 font-semibold">
-        Avenore Architecture
+        Avenor Architects
       </span>
     </div>
   );

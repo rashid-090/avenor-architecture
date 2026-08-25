@@ -148,7 +148,7 @@ export default function LoadingScreen() {
       >
         <Image
           src="/avenor-bl-logo.webp"
-          alt="Avenore Logo"
+          alt="Avenor Logo"
           fill
           priority
           sizes="232px"

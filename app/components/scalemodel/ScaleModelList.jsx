@@ -151,14 +151,14 @@ function ScaleModelListContent({ initialScaleModels = [] }) {
           {/* Badge for scale & type */}
           {(item.scale || item.type) && (
             <span className="absolute top-4 left-4 z-10 bg-black/10 backdrop-blur-xs text-white text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 pointer-events-none">
-              {item.scale ? `${item.scale} • ${item.type}` : item.type}
+              {item.scale ? `${item.type}` : item.type}
             </span>
           )}
 
           {/* Core Image with hover zoom */}
           <div className="reveal-image w-full h-full relative transition-transform duration-700 ease-out group-hover:scale-105 z-0">
             <Image
-              src={item.image}
+              src={item.cardImage || item.image}
               alt={item.title}
               fill
               loading={isAboveFold ? "eager" : "lazy"}
@@ -205,7 +205,7 @@ function ScaleModelListContent({ initialScaleModels = [] }) {
             Scale models
           </h1>
           <p className="text-zinc-500 text-sm md:text-[15px] font-light leading-relaxed">
-            Explore Avenore Studio's collection of precision physical scale models, urban planning maquettes, and 3D architectural prototypes. We translate complex spatial concepts into tactile, hand-crafted miniature representations.
+            Explore Avenor Architects collection of precision physical scale models, urban planning maquettes, and 3D architectural prototypes. We translate complex spatial concepts into tactile, hand-crafted miniature representations.
           </p>
         </div>
 

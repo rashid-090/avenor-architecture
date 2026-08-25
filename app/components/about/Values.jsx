@@ -12,31 +12,45 @@ if (typeof window !== "undefined") {
 const values = [
   {
     id: 1,
-    title: "Timeless quality",
+    title: "CLIENT ENGAGEMENT",
     description:
-      "We create enduring designs that outlast trends and remain relevant for years to come.",
+      "We begin by listening to your vision, understanding your needs, and defining clear goals for the journey ahead.",
     icon: "/Timeless.svg",
   },
   {
     id: 2,
-    title: "Modern functionality",
+    title: "DESIGN DEVELOPMENT",
     description:
-      "Every space is thoughtfully designed to be both beautiful and perfectly livable.",
+      "We explore ideas and transform them into thoughtful, refined architectural solutions shaped around your vision.",
     icon: "/Modern.svg",
   },
   {
     id: 3,
-    title: "Client-centered approach",
+    title: "CONSTRUCTION DOCUMENTATION",
     description:
-      "Your vision leads the way — we listen, adapt, and design with your lifestyle in mind.",
-      icon: "/approach.svg",
+      "We develop detailed drawings and technical documentation to ensure every aspect of the design is ready for execution.",
+    icon: "/approach.svg",
   },
   {
     id: 4,
-    title: "Conscious craftsmanship",
+    title: "TENDER & PROCUREMENT",
     description:
-      "We value sustainability and partner with artisans who share our commitment to ethical design.",
+      "We assist in selecting the right contractors, materials, and suppliers while maintaining quality and project value.",
     icon: "/craftsmanship.svg",
+  },
+  {
+    id: 5,
+    title: "CONSTRUCTION ADMINISTRATION",
+    description:
+      "We stay involved throughout construction, helping ensure the design is executed with accuracy and attention to detail.",
+    icon: "/Timeless.svg",
+  },
+  {
+    id: 6,
+    title: "PROJECT COMPLETION",
+    description:
+      "We review the final outcome, refine the last details, and bring the project to a successful completion.",
+    icon: "/Modern.svg",
   },
 ];
 
@@ -88,7 +102,7 @@ export default function ValuesSection() {
           {/* Core Image */}
           <div className="about-values-image w-full h-full relative">
             <Image
-              src="/about_values.png"
+              src="/abt_value.webp"
               alt="Minimalist architectural model on workshop table"
               fill
               priority
@@ -103,11 +117,10 @@ export default function ValuesSection() {
           {/* Header section */}
           <div className="mb-16 lg:mb-20">
             <span className="text-[11px] uppercase tracking-[0.25em] text-zinc-400 font-semibold block mb-4">
-              OUR VALUES
+              OUR WORKFLOW
             </span>
             <h2 className="text-zinc-900 text-2xl md:text-[34px] lg:text-[38px] font-normal leading-[1.3] tracking-tight max-w-xl">
-              Driven by purpose, designed with passion. Integrity in every
-              detail.
+             Thoughtfully planned, precisely delivered. Excellence in every step.
             </h2>
           </div>
 
@@ -121,12 +134,12 @@ export default function ValuesSection() {
                 {/* Minimalist Line/Outline Icon */}
                 <div className="relative mb-4 text-zinc-950 flex items-center h-12">
                   <Image
-                    className="w-20 object-contain"
+                    className="w-20 h-auto object-contain"
                     src={value.icon}
                     alt={value.title}
                     width={100}
                     height={40}
-                    style={{ height: "auto" }}
+                    style={{ width: "auto", height: "auto" }}
                   />
                 </div>
 
@@ -134,7 +147,7 @@ export default function ValuesSection() {
                 <div className="w-full h-[1px] bg-zinc-100 mb-6" />
 
                 {/* Text Block */}
-                <div className="max-w-md">
+                <div className="max-w-xl">
                   <h3 className="text-zinc-900 text-lg md:text-[20px] font-medium tracking-tight mb-3">
                     {value.title}
                   </h3>

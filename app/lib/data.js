@@ -4,7 +4,7 @@ export const servicesData = [
     slug: "architecture",
     title: "Architecture",
     subtitle: "ARCHITECTURAL DESIGN",
-    image: "https://images.unsplash.com/photo-1656139789469-e84efe50a9e2?q=80&w=2070&auto=format&fit=crop",
+    image: "/service_architects.webp",
     paragraphs: [
       "We create architecture that blends functionality, aesthetics, and purpose. Every project is thoughtfully designed to reflect your vision while responding to its surroundings, lifestyle, and long-term needs.",
       "From concept development to planning and execution, our team delivers timeless architectural solutions that balance creativity, sustainability, and precision in every detail."
@@ -15,7 +15,7 @@ export const servicesData = [
     slug: "interior-design",
     title: "Interior Design",
     subtitle: "INTERIOR DESIGN",
-    image: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=3132&auto=format&fit=crop",
+    image: "/service_interior.webp",
     paragraphs: [
       "We design interiors that feel comfortable, functional, and uniquely personal. Every space is carefully planned to enhance the way people live, work, and interact every day.",
       "From space planning and material selection to custom finishes and lighting, we create interiors that combine beauty, practicality, and lasting value."
@@ -26,7 +26,7 @@ export const servicesData = [
     slug: "landscape-design",
     title: "Landscape Design",
     subtitle: "LANDSCAPE DESIGN",
-    image: "https://images.unsplash.com/photo-1758194403945-4263592f8b98?q=80&w=3132&auto=format&fit=crop",
+    image: "/service_lanscape.webp",
     paragraphs: [
       "Our landscape designs create outdoor environments that complement the architecture while enhancing comfort, beauty, and usability throughout the year.",
       "Whether it's a residential garden, commercial outdoor space, or recreational area, we design landscapes that seamlessly connect nature with modern living."
@@ -37,7 +37,7 @@ export const servicesData = [
     slug: "site-supervision",
     title: "Site Supervision",
     subtitle: "SITE SUPERVISION",
-    image: "https://plus.unsplash.com/premium_photo-1664474871121-131e63f14315?q=80&w=2072&auto=format&fit=crop",
+    image: "/service_sitevisit.webp",
     paragraphs: [
       "We oversee every stage of construction to ensure the design is executed exactly as planned. Our supervision focuses on quality, accuracy, and timely project delivery.",
       "By coordinating contractors, monitoring workmanship, and resolving site challenges, we help maintain high construction standards from start to finish."
@@ -48,7 +48,7 @@ export const servicesData = [
     slug: "project-management",
     title: "Project Management",
     subtitle: "PROJECT MANAGEMENT",
-    image: "https://images.unsplash.com/photo-1677078610588-aed2834ad968?q=80&w=2076&auto=format&fit=crop",
+    image: "/service_project_management.webp",
     paragraphs: [
       "We manage every phase of your project with clear planning, efficient coordination, and transparent communication to keep everything running smoothly.",
       "From budgeting and scheduling to team coordination and quality control, we ensure projects are completed on time, within budget, and to the highest standards."
@@ -59,7 +59,7 @@ export const servicesData = [
     slug: "technical-drawing",
     title: "Technical Drawing",
     subtitle: "TECHNICAL DRAWINGS",
-    image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=3131&auto=format&fit=crop",
+    image: "/service_technicaldrawing.webp",
     paragraphs: [
       "We prepare detailed technical drawings that provide clear guidance for construction, ensuring every element is accurately documented before execution begins.",
       "Our comprehensive drawing packages include architectural layouts, construction details, and coordination drawings that minimize errors and improve project efficiency."
@@ -70,7 +70,7 @@ export const servicesData = [
     slug: "scale-model",
     title: "Scale Model",
     subtitle: "ARCHITECTURAL SCALE MODELS",
-    image: "https://images.unsplash.com/photo-1783144181584-ba96eae14d20?q=80&w=3131&auto=format&fit=crop",
+    image: "/service_scalemodal.webp",
     paragraphs: [
       "Our architectural scale models provide a realistic representation of the design, helping clients better understand form, proportion, and spatial relationships.",
       "Whether for presentations, approvals, or project visualization, each model is carefully crafted to communicate the design with clarity and precision."
@@ -81,7 +81,7 @@ export const servicesData = [
     slug: "interior-fit-out",
     title: "Interior Fit-Out",
     subtitle: "INTERIOR FIT-OUT",
-    image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2900&auto=format&fit=crop",
+    image: "/service_fitout.webp",
     paragraphs: [
       "We transform empty spaces into fully finished interiors through thoughtful planning, quality craftsmanship, and seamless execution tailored to your requirements.",
       "From partitions, ceilings, flooring, and joinery to lighting and final finishes, we deliver complete fit-out solutions that are functional, refined, and ready for use."
@@ -103,7 +103,7 @@ export const portfolioProjects = [
     architect: "Mikaele Mora",
     headline: "A stunning four storey summer house in New York, thoughtfully designed for a young family of four",
     paragraphs: [
-      "At Avenore Studio, we approach each project with a thoughtful blend of environmental psychology, art, architecture, and cultural insight — all grounded in meticulous project management.",
+      "At Avenor Architects, we approach each project with a thoughtful blend of environmental psychology, art, architecture, and cultural insight — all grounded in meticulous project management.",
       "We design interior spaces that are not only visually stunning but also deeply intuitive and liveable. The layout adapts seamlessly to changing seasonal light."
     ],
     metaImage1: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=100&w=600&auto=format&fit=crop",
@@ -304,9 +304,9 @@ export const portfolioProjects = [
 export const blogsData = [
   {
     id: 1,
-    slug: "how-an-avenore-became-a-model-for-affordable-sustainable-living",
+    slug: "how-an-avenor-architects-became-a-model-for-affordable-sustainable-living",
     category: "Media",
-    title: "How an Avenore became a model for affordable, sustainable living",
+    title: "How an Avenor Architects became a model for affordable, sustainable living",
     date: "October 14, 2025",
     readTime: "5 min read",
     author: "Mikaele Mora",
@@ -328,9 +328,9 @@ export const blogsData = [
     title: "2025 Design Awards Recap",
     date: "November 08, 2025",
     readTime: "4 min read",
-    author: "Avenore Editors",
+    author: "Avenor Architects",
     image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=100&w=1000&auto=format&fit=crop",
-    excerpt: "Avenore Studio takes home multiple architectural design honors for structural innovation and community-focused public structures.",
+    excerpt: "Avenor Architects takes home multiple architectural design honors for structural innovation and community-focused public structures.",
     headline: "Recognizing spatial excellence, structural honesty, and low-embodied carbon design methodologies",
     paragraphs: [
       "This year's awards highlighted works that challenge standard building materials. We are honored to receive gold medals for both our residential retreat portfolios and urban community library projects.",
@@ -344,7 +344,7 @@ export const blogsData = [
     id: 3,
     slug: "industrial-luxury-style-explained",
     category: "Media",
-    title: "Industrial Luxury Style, explained by Avenore Design",
+    title: "Industrial Luxury Style, explained by Avenor Design",
     date: "December 03, 2025",
     readTime: "6 min read",
     author: "Mikaele Mora",
@@ -404,7 +404,7 @@ export const blogsData = [
     title: "Light as a Sculptural Element in Modern Architecture",
     date: "March 02, 2026",
     readTime: "5 min read",
-    author: "Avenore Editors",
+    author: "Avenor Architects",
     image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=100&w=1000&auto=format&fit=crop",
     excerpt: "Designing with shifting daylight to create dynamic indoor shadows and highlighting natural textures throughout the day.",
     headline: "Harnessing natural light paths to transform static rooms into changing sensory environments",
@@ -456,9 +456,9 @@ export const blogsData = [
   },
   {
     id: 9,
-    slug: "how-an-avenore-became-a-model-for-affordable-sustainable-living",
+    slug: "how-an-avenor-became-a-model-for-affordable-sustainable-living",
     category: "Media",
-    title: "How an Avenore became a model for affordable, sustainable living",
+    title: "How an Avenor became a model for affordable, sustainable living",
     date: "October 14, 2025",
     readTime: "5 min read",
     author: "Mikaele Mora",
@@ -480,9 +480,9 @@ export const blogsData = [
     title: "2025 Design Awards Recap",
     date: "November 08, 2025",
     readTime: "4 min read",
-    author: "Avenore Editors",
+    author: "Avenor Architects",
     image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=100&w=1000&auto=format&fit=crop",
-    excerpt: "Avenore Studio takes home multiple architectural design honors for structural innovation and community-focused public structures.",
+    excerpt: "Avenor Architects takes home multiple architectural design honors for structural innovation and community-focused public structures.",
     headline: "Recognizing spatial excellence, structural honesty, and low-embodied carbon design methodologies",
     paragraphs: [
       "This year's awards highlighted works that challenge standard building materials. We are honored to receive gold medals for both our residential retreat portfolios and urban community library projects.",
@@ -496,7 +496,7 @@ export const blogsData = [
     id: 11,
     slug: "industrial-luxury-style-explained",
     category: "Media",
-    title: "Industrial Luxury Style, explained by Avenore Design",
+    title: "Industrial Luxury Style, explained by Avenor Architects",
     date: "December 03, 2025",
     readTime: "6 min read",
     author: "Mikaele Mora",
@@ -556,7 +556,7 @@ export const blogsData = [
     title: "Light as a Sculptural Element in Modern Architecture",
     date: "March 02, 2026",
     readTime: "5 min read",
-    author: "Avenore Editors",
+    author: "Avenor Architects",
     image: "https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=100&w=1000&auto=format&fit=crop",
     excerpt: "Designing with shifting daylight to create dynamic indoor shadows and highlighting natural textures throughout the day.",
     headline: "Harnessing natural light paths to transform static rooms into changing sensory environments",

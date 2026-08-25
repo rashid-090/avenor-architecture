@@ -96,15 +96,15 @@ export async function generateMetadata({ params }) {
   if (!model) return {};
 
   return {
-    title: `${model.title} (${model.scale || "Scale Model"}) | Avenore Architecture`,
-    description: model.headline || `Explore details, physical craftsmanship, scale metrics, and creative processes of ${model.title}, an architectural scale model by Avenore Architecture.`,
+    title: `${model.title} (${model.scale || "Scale Model"}) | Avenor Architects`,
+    description: model.headline || `Explore details, physical craftsmanship, scale metrics, and creative processes of ${model.title}, an architectural scale model by Avenor Architects.`,
     alternates: {
-      canonical: `https://avenore.com/scale-models/${slug}`,
+      canonical: `https://avenorarchitects.com/scale-models/${slug}`,
     },
     openGraph: {
-      title: `${model.title} (${model.scale || "Scale Model"}) | Avenore Architecture`,
-      description: model.headline || `Explore details, physical craftsmanship, scale metrics, and creative processes of ${model.title}, an architectural scale model by Avenore Architecture.`,
-      url: `https://avenore.com/scale-models/${slug}`,
+      title: `${model.title} (${model.scale || "Scale Model"}) | Avenor Architects`,
+      description: model.headline || `Explore details, physical craftsmanship, scale metrics, and creative processes of ${model.title}, an architectural scale model by Avenor Architects.`,
+      url: `https://avenorarchitects.com/scale-models/${slug}`,
       type: "article",
       images: model.image
         ? [

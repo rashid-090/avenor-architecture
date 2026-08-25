@@ -4,15 +4,15 @@ import { client, urlFor } from "../lib/sanity";
 import LoadingScreen from "../components/common/LoadingScreen";
 
 export const metadata = {
-  title: "Architectural Insights, Material Research & Design | Avenore",
-  description: "Read thoughts on modern architectural geometry, material science, sustainability, and green design from the architects at Avenore Studio.",
+  title: "Architectural Insights, Material Research & Design | Avenor",
+  description: "Read thoughts on modern architectural geometry, material science, sustainability, and green design from the architects at Avenor Architects.",
   alternates: {
-    canonical: "https://avenore.com/blogs",
+    canonical: "https://avenorarchitects.com/blogs",
   },
   openGraph: {
-    title: "Architectural Insights, Material Research & Design | Avenore",
-    description: "Read thoughts on modern architectural geometry, material science, sustainability, and green design from the architects at Avenore Studio.",
-    url: "https://avenore.com/blogs",
+    title: "Architectural Insights, Material Research & Design | Avenor",
+    description: "Read thoughts on modern architectural geometry, material science, sustainability, and green design from the architects at Avenor Architects.",
+    url: "https://avenorarchitects.com/blogs",
     type: "website",
   }
 };
@@ -59,7 +59,7 @@ export default async function BlogsPage() {
           slug: item.slug || `blog-${idx}`,
           title: item.title || "",
           category: item.category || "Media",
-          author: item.author || "Avenore Editors",
+          author: item.author || "Avenor Architects",
           image: item.image ? urlFor(item.image).url() : "",
           excerpt: item.excerpt || "",
           headline: item.headline || "",

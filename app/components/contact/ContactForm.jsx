@@ -93,6 +93,15 @@ export default function ContactForm() {
 
     setStatus("sending");
     setTimeout(() => {
+      const whatsappMessage = `New Contact Form Submission:
+*Name:* ${formData.name}
+*Email:* ${formData.email}
+*Service:* ${formData.service}
+*Phone:* ${formData.phone}${formData.message?.trim() ? `\n*Message:* ${formData.message.trim()}` : ""}`;
+
+      const whatsappUrl = `https://wa.me/971506911786?text=${encodeURIComponent(whatsappMessage)}`;
+      window.open(whatsappUrl, "_blank");
+
       setStatus("success");
       showToast("Message sent successfully!", "success");
       setFormData({
@@ -104,7 +113,7 @@ export default function ContactForm() {
       });
       // Reset status back to idle after 5 seconds
       setTimeout(() => setStatus("idle"), 5000);
-    }, 1500);
+    }, 800);
   };
 
   const handlePhoneChange = (val) => {
@@ -126,7 +135,7 @@ export default function ContactForm() {
               Get in touch
             </h1>
             <p className="text-zinc-500 text-sm md:text-[15px] font-light leading-relaxed xl:pr-10">
-              Don’t hesitate to get in touch with Avenore if you want to find out
+              Don’t hesitate to get in touch with Avenor if you want to find out
               about design services that incorporate luxurious living and
               timeless interiors.
             </p>
@@ -179,7 +188,7 @@ export default function ContactForm() {
           priority
           loading="eager"
           fetchPriority="high"
-          className="object-cover object-center"
+          className="object-cover object-center scale-x-[-1] brightness-75"
           sizes="(max-width: 1024px) 100vw, 50vw"
         />
 
@@ -209,7 +218,7 @@ export default function ContactForm() {
                 Message Sent Successfully
               </h3>
               <p className="text-zinc-200 text-xs font-light leading-relaxed max-w-xs mx-auto">
-                Thank you for reaching out to Avenore. Our design directors will contact you shortly to discuss your project.
+                Thank you for reaching out to Avenor. Our design directors will contact you shortly to discuss your project.
               </p>
             </div>
           ) : (

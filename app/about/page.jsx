@@ -6,15 +6,15 @@ import Team from "../components/about/Team";
 import Scrollservicelist from "../components/about/Scrollservicelist";
 
 export const metadata = {
-  title: "About Our Architectural Design Studio | Avenore Architecture",
-  description: "Learn about Avenore Architecture's philosophy, timeless design values, sustainable architectural approach, and meet our team of expert designers.",
+  title: "About Our Architectural Design Studio | Avenor Architects",
+  description: "Learn about Avenor Architects's philosophy, timeless design values, sustainable architectural approach, and meet our team of expert designers.",
   alternates: {
-    canonical: "https://avenore.com/about",
+    canonical: "https://avenorarchitects.com/about",
   },
   openGraph: {
-    title: "About Our Architectural Design Studio | Avenore Architecture",
-    description: "Learn about Avenore Architecture's philosophy, timeless design values, sustainable architectural approach, and meet our team of expert designers.",
-    url: "https://avenore.com/about",
+    title: "About Our Architectural Design Studio | Avenor Architects",
+    description: "Learn about Avenor Architects's philosophy, timeless design values, sustainable architectural approach, and meet our team of expert designers.",
+    url: "https://avenorarchitects.com/about",
     type: "website",
   }
 };

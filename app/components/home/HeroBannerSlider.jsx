@@ -8,30 +8,48 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 const slides = [
   {
     id: 0,
-    image: "/banner1.webp",
+    image: "/hero/banner_alnoor.webp",
     tag: "Residential / Ajman, UAE",
     title: "Al Noor Villa",
     subtitle: "A contemporary UAE villa blending desert-inspired elegance, clean geometry, premium materials, and lush landscaping to create a luxurious yet welcoming family home.",
     link: "/projects",
-    linkText: "View project",
+    linkText: "View projects",
   },
   {
     id: 1,
-    image: "/banner2.webp",
-    tag: "Residential / Ajman, UAE",
-    title: "Al Noor Villa",
-    subtitle: "A contemporary UAE villa blending desert-inspired elegance, clean geometry, premium materials, and lush landscaping to create a luxurious yet welcoming family home.",
+    image: "/hero/banner_mosque.webp",
+    tag: "Cultural / GCC Region",
+    title: "GC Mosque",
+    subtitle: "A contemporary congregational landmark inspired by Islamic geometry and desert landscapes, combining sculptural architecture, sustainable design strategies, and lush public spaces for worship, learning, and community.",
     link: "/projects",
-    linkText: "View project",
+    linkText: "View projects",
   },
   {
     id: 2,
-    image: "/banner3.webp",
-    tag: "Residential / Ajman, UAE",
-    title: "Al Noor Villa",
-    subtitle: "A contemporary UAE villa blending desert-inspired elegance, clean geometry, premium materials, and lush landscaping to create a luxurious yet welcoming family home.",
+    image: "/hero/banner_office.webp",
+    tag: "Corporate / Dubai, UAE",
+    title: "Stratex Office",
+    subtitle: "A refined contemporary workplace designed around professionalism, collaboration, and comfort, combining warm architectural lighting, natural planting, premium materials, and flexible spaces for modern business.",
     link: "/projects",
-    linkText: "View project",
+    linkText: "View projects",
+  },
+  {
+    id: 3,
+    image: "/hero/banner_cafe.webp",
+    tag: "Hospitality / Jumeirah, Dubai",
+    title: "Elara Cafe",
+    subtitle: "An intimate boutique café where Mediterranean influences, soft arches, natural textures, handcrafted details, and warm lighting create a calm and inviting space for a relaxed hospitality experience.",
+    link: "/projects",
+    linkText: "View projects",
+  },
+  {
+    id: 4,
+    image: "/hero/banner_royalyatch.webp",
+    tag: "Hospitality / Dubai, UAE",
+    title: "Royal Sama",
+    subtitle: "A high-end floating restaurant and luxury hospitality destination, designed as a multi-level yacht offering fine dining, private celebrations, entertainment, and panoramic waterfront experiences.",
+    link: "/projects",
+    linkText: "View projects",
   },
 
 ];
@@ -174,7 +192,7 @@ export default function HeroBannerSlider() {
             priority
             loading="eager"
             fetchPriority="high"
-            className="object-cover object-center"
+            className="object-cover bg-no-repeat object-left md:object-center"
             sizes="100vw"
           />
           {/* Dark gradient overlays */}

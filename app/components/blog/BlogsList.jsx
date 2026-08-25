@@ -154,7 +154,7 @@ export default function BlogsList({ initialBlogs = [] }) {
           </h1>
           <p className="text-zinc-500 text-sm md:text-[15px] font-light leading-relaxed">
             Thoughts on architectural design, material research, and sustainable
-            development from the team at Avenore Studio.
+            development from the team at Avenor Architects.
           </p>
         </div>
 

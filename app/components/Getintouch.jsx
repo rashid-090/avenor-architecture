@@ -28,10 +28,10 @@ export default function GetInTouchSection() {
         className="absolute inset-0 w-full h-[130%] -top-[15%] pointer-events-none"
       >
         <Image
-          src="/getintouch.webp"
+          src="/footer_bg.webp"
           alt="Architectural wood ceiling interior"
           fill
-          className="object-cover brightness-[0.72] contrast-[1.03]"
+          className="object-cover"
           sizes="100vw"
           priority
         />

@@ -39,7 +39,7 @@ export default function Footer() {
                 className="object-contain" 
                 fill 
                 sizes="192px"
-                alt="Avenore logo"
+                alt="Avenor logo"
               />
             </div>
             <p className="text-zinc-500 text-sm font-light max-w-sm leading-relaxed">
@@ -59,7 +59,7 @@ Architecture, interiors, technical detailing, fit-out coordination, and project 
                 { label: "Our Services", href: "/services" },
                 { label: "Our Projects", href: "/projects" },
                 { label: "Scale Modals", href: "/scale-models" },
-                { label: "Blogs", href: "/blogs" },
+                // { label: "Blogs", href: "/blogs" },
                 { label: "Contact Us", href: "/contact" }
               ].map((link, idx) => (
                 <Link
@@ -159,8 +159,25 @@ Architecture, interiors, technical detailing, fit-out coordination, and project 
         {/* Bottom Row (Copyrights & Go to Top) */}
         <div className="border-t border-zinc-100 pt-4  flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 text-zinc-500 text-xs font-light tracking-wide text-center sm:text-left">
-            <span>© {year} Avenore Studio. All rights reserved.</span>
-            <span className="hidden sm:inline text-zinc-300">|</span>
+            <span>© {year} Avenor Architects. All rights reserved.</span>
+          
+          </div>
+          
+          <div className="flex items-center gap-8">
+            {/* <div className="flex gap-6">
+              {["Privacy Policy", "Terms of Use"].map((s) => (
+                <a
+                  key={s}
+                  href="#"
+                  className="text-zinc-500 hover:text-zinc-950 text-xs font-light tracking-wide transition-colors"
+                >
+                  {s}
+                </a>
+              ))}
+            </div> */}
+
+            <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 text-zinc-500 text-xs font-light tracking-wide text-center sm:text-left">
+        
             <span>
               Powered by{" "}
               <a
@@ -173,24 +190,11 @@ Architecture, interiors, technical detailing, fit-out coordination, and project 
               </a>
             </span>
           </div>
-          
-          <div className="flex items-center gap-8">
-            <div className="flex gap-6">
-              {["Privacy Policy", "Terms of Use"].map((s) => (
-                <a
-                  key={s}
-                  href="#"
-                  className="text-zinc-500 hover:text-zinc-950 text-xs font-light tracking-wide transition-colors"
-                >
-                  {s}
-                </a>
-              ))}
-            </div>
 
             {/* Go to Top Action */}
             <button
               onClick={handleScrollToTop}
-              className="group flex items-center justify-center w-10 h-10 border border-zinc-200 hover:border-zinc-950 transition-colors duration-300 rounded-full"
+              className="group cursor-pointer flex items-center justify-center w-10 h-10 border border-zinc-200 hover:border-zinc-950 transition-colors duration-300 rounded-full"
               aria-label="Scroll to top"
             >
               <ArrowUp

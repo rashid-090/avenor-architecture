@@ -18,7 +18,7 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-export default function InnerProjectShowcase({ project }) {
+export default function InnerProjectShowcase({ project, related = [] }) {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -82,7 +82,9 @@ export default function InnerProjectShowcase({ project }) {
         project.fullWidthImage,
       ].filter(Boolean);
 
-  const related = portfolioProjects.filter((p) => p.slug !== project.slug).slice(0, 4);
+  const displayRelated = (related && related.length > 0)
+    ? related
+    : portfolioProjects.filter((p) => p.slug !== project.slug).slice(0, 4);
 
   const [lightboxIndex, setLightboxIndex] = React.useState(null);
 
@@ -143,23 +145,23 @@ export default function InnerProjectShowcase({ project }) {
       <div className="grid grid-cols-2 md:grid-cols-5 gap-8 border-b border-zinc-100 pb-16 mb-24 text-sm font-light">
         <div>
           <span className="text-zinc-400 block mb-2 font-normal text-xs uppercase tracking-wider">Type</span>
-          <span className="text-zinc-950 font-normal text-base">{project.type}</span>
+          <span className="text-zinc-950 font-normal text-base">{project?.type || "Not Available"}</span>
         </div>
         <div>
           <span className="text-zinc-400 block mb-2 font-normal text-xs uppercase tracking-wider">Location</span>
-          <span className="text-zinc-950 font-normal text-base">{project.location}</span>
+          <span className="text-zinc-950 font-normal text-base">{project?.location || "Not Available"}</span>
         </div>
         <div>
           <span className="text-zinc-400 block mb-2 font-normal text-xs uppercase tracking-wider">Year</span>
-          <span className="text-zinc-950 font-normal text-base">{project.year}</span>
+          <span className="text-zinc-950 font-normal text-base">{project?.year || "Not Available"}</span>
         </div>
         <div>
           <span className="text-zinc-400 block mb-2 font-normal text-xs uppercase tracking-wider">Size</span>
-          <span className="text-zinc-950 font-normal text-base">{project.size}</span>
+          <span className="text-zinc-950 font-normal text-base">{project?.size || "Not Available"}</span>
         </div>
         <div>
           <span className="text-zinc-400 block mb-2 font-normal text-xs uppercase tracking-wider">Architect</span>
-          <span className="text-zinc-950 font-normal text-base">{project.architect}</span>
+          <span className="text-zinc-950 font-normal text-base">{project?.architect || "Not Available"}</span>
         </div>
       </div>
 
@@ -168,7 +170,7 @@ export default function InnerProjectShowcase({ project }) {
         {/* Left Column: Giant headline */}
         <div className="lg:col-span-5">
           <h2 className="text-zinc-900 text-2xl md:text-[32px] font-normal leading-[1.3] tracking-tight">
-            {project.headline}
+            {project?.headline || "Not Available"}
           </h2>
         </div>
 
@@ -179,14 +181,14 @@ export default function InnerProjectShowcase({ project }) {
           ))}
           <div className="mt-4 pt-6 border-t border-zinc-100">
             <span className="text-[11px] uppercase tracking-[0.25em] text-zinc-400 font-semibold block mb-2">CLIENT</span>
-            <span className="text-zinc-950 font-normal text-base">Private client</span>
+            <span className="text-zinc-950 font-normal text-base">{project?.client || "Not Available"}</span>
           </div>
         </div>
       </div>
 
       {/* Swiper Carousel Project Gallery */}
       {displayGallery.length > 0 && (
-        <div className="mb-24">
+        <div className="mb-24 overflow-hidden">
           <div className="flex items-center justify-between mb-8 border-b border-zinc-100 pb-4">
             <span className="text-[11px] uppercase tracking-[0.25em] text-zinc-400 font-semibold block">
               PROJECT GALLERY
@@ -289,7 +291,7 @@ export default function InnerProjectShowcase({ project }) {
 
 
       {/* Related Projects Area */}
-      {related.length > 0 && (
+      {displayRelated.length > 0 && (
         <div className="border-t border-zinc-100 pt-16">
           <div className="flex items-center justify-between mb-10">
             <span className="text-[11px] uppercase tracking-[0.25em] text-zinc-400 font-semibold block">
@@ -307,7 +309,7 @@ export default function InnerProjectShowcase({ project }) {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {related.map((item) => (
+            {displayRelated.map((item) => (
               <Link
                 key={item.id}
                 href={`/projects/${item.slug}`}

@@ -9,15 +9,15 @@ export async function generateMetadata({ params }) {
   if (!service) return {};
 
   return {
-    title: `${service.title} — Services & Expertise | Avenore Architecture`,
-    description: service.paragraphs?.[0] || `Avenore Architecture offers premium ${service.title} services, executing high-spec architectural and design plans.`,
+    title: `${service.title} — Services & Expertise | Avenor Architects`,
+    description: service.paragraphs?.[0] || `Avenor Architects offers premium ${service.title} services, executing high-spec architectural and design plans.`,
     alternates: {
-      canonical: `https://avenore.com/services/${slug}`,
+      canonical: `https://avenorarchitects.com/services/${slug}`,
     },
     openGraph: {
-      title: `${service.title} — Services & Expertise | Avenore Architecture`,
-      description: service.paragraphs?.[0] || `Avenore Architecture offers premium ${service.title} services, executing high-spec architectural and design plans.`,
-      url: `https://avenore.com/services/${slug}`,
+      title: `${service.title} — Services & Expertise | Avenor Architects`,
+      description: service.paragraphs?.[0] || `Avenor Architects offers premium ${service.title} services, executing high-spec architectural and design plans.`,
+      url: `https://avenorarchitects.com/services/${slug}`,
       type: "website",
       images: [
         {

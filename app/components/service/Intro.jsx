@@ -120,7 +120,7 @@ export default function Intro() {
               {/* Core image */}
               <div className="about-reveal-image w-full h-full relative">
                 <Image
-                  src="/servicebg.webp"
+                  src="/service_bg.webp"
                   alt="Architect reviewing blueprints at studio"
                   fill
                   priority

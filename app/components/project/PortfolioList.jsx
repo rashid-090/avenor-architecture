@@ -209,7 +209,7 @@ function PortfolioListContent({ initialProjects = [] }) {
             Our projects
           </h1>
           <p className="text-zinc-500 text-sm md:text-[15px] font-light leading-relaxed">
-            At Avenore Studio, we approach each project with a thoughtful blend of 
+            At Avenor Architects, we approach each project with a thoughtful blend of 
             environmental psychology, art, architecture, and cultural insight — 
             all grounded in meticulous project management.
           </p>
