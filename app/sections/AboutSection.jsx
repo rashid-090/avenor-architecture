@@ -138,7 +138,7 @@ export default function AboutSection() {
     <section
       id="about"
       ref={sectionRef}
-      className="relative bg-white text-zinc-950 py-16 md:py-20"
+      className="relative !overflow-hidden bg-white text-zinc-950 py-16 md:py-20"
     >
       {/* WHO WE ARE Section */}
       <div className=" w-[95%] mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-20">
@@ -190,7 +190,7 @@ We look at architecture beyond plans and elevations, focusing on how a space is 
         </p>
 
         {/* Carousel Slider */}
-        <div ref={cardsRef} className="w-full">
+        <div ref={cardsRef} className="w-full ">
           <Swiper
             modules={[Autoplay]}
             spaceBetween={20}
