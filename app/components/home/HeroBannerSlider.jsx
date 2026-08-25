@@ -9,6 +9,7 @@ const slides = [
   {
     id: 0,
     image: "/hero/banner_alnoor.webp",
+    mobImage: "/hero/alnoor_thumb.webp",
     tag: "Residential / Ajman, UAE",
     title: "Al Noor Villa",
     subtitle: "A contemporary UAE villa blending desert-inspired elegance, clean geometry, premium materials, and lush landscaping to create a luxurious yet welcoming family home.",
@@ -18,6 +19,7 @@ const slides = [
   {
     id: 1,
     image: "/hero/banner_mosque.webp",
+        mobImage: "/hero/mosque_thumb.webp",
     tag: "Cultural / GCC Region",
     title: "GC Mosque",
     subtitle: "A contemporary congregational landmark inspired by Islamic geometry and desert landscapes, combining sculptural architecture, sustainable design strategies, and lush public spaces for worship, learning, and community.",
@@ -27,6 +29,7 @@ const slides = [
   {
     id: 2,
     image: "/hero/banner_office.webp",
+        mobImage: "/hero/office_thumb.webp",
     tag: "Corporate / Dubai, UAE",
     title: "Stratex Office",
     subtitle: "A refined contemporary workplace designed around professionalism, collaboration, and comfort, combining warm architectural lighting, natural planting, premium materials, and flexible spaces for modern business.",
@@ -36,6 +39,7 @@ const slides = [
   {
     id: 3,
     image: "/hero/banner_cafe.webp",
+        mobImage: "/hero/cafe_thumb.webp",
     tag: "Hospitality / Jumeirah, Dubai",
     title: "Elara Cafe",
     subtitle: "An intimate boutique café where Mediterranean influences, soft arches, natural textures, handcrafted details, and warm lighting create a calm and inviting space for a relaxed hospitality experience.",
@@ -45,6 +49,7 @@ const slides = [
   {
     id: 4,
     image: "/hero/banner_royalyatch.webp",
+        mobImage: "/hero/royal_thumb.webp",
     tag: "Hospitality / Dubai, UAE",
     title: "Royal Sama",
     subtitle: "A high-end floating restaurant and luxury hospitality destination, designed as a multi-level yacht offering fine dining, private celebrations, entertainment, and panoramic waterfront experiences.",
@@ -185,6 +190,18 @@ export default function HeroBannerSlider() {
           exit={{ opacity: 0, scale: 1 }}
           transition={{ duration: 1, ease: [0.43, 0.13, 0.23, 0.96] }}
         >
+          {/* Mobile background image */}
+          <Image
+            src={slide.mobImage || slide.image}
+            alt={slide.title}
+            fill
+            priority
+            loading="eager"
+            fetchPriority="high"
+            className="block md:hidden object-cover bg-no-repeat object-center"
+            sizes="100vw"
+          />
+          {/* Desktop background image */}
           <Image
             src={slide.image}
             alt={slide.title}
@@ -192,7 +209,7 @@ export default function HeroBannerSlider() {
             priority
             loading="eager"
             fetchPriority="high"
-            className="object-cover bg-no-repeat object-left md:object-center"
+            className="hidden md:block object-cover bg-no-repeat object-left md:object-center"
             sizes="100vw"
           />
           {/* Dark gradient overlays */}
