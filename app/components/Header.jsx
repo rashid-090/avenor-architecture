@@ -17,15 +17,14 @@ const navLinks = [
 export default function Header() {
   const pathname = usePathname();
 
-  // Helper to accurately determine if current page is Home across SSR, Vercel preview, and hydration
+  // Pure path check for Home route across Local dev, SSR, Vercel preview, and production builds
   const checkIsHome = (path) => {
-    if (!path) return true; // Default safely to true (Home) during SSR / static generation of root page
-    const cleanPath = path.split("?")[0].split("#")[0].replace(/\/$/, "");
-    return cleanPath === "" || cleanPath === "/";
+    if (!path) return true;
+    const cleanPath = path.split("?")[0].split("#")[0].toLowerCase().replace(/\/$/, "");
+    return cleanPath === "" || cleanPath === "/" || cleanPath === "/index" || cleanPath === "/index.html";
   };
 
-  const currentPath = pathname || (typeof window !== "undefined" ? window.location.pathname : "/");
-  const isHome = checkIsHome(currentPath);
+  const isHome = checkIsHome(pathname);
 
   const headerRef = useRef(null);
   const logoRef = useRef(null);
@@ -33,17 +32,7 @@ export default function Header() {
   const ctaRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [logoOpacity, setLogoOpacity] = useState(1);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const hasLoaded = sessionStorage.getItem("hasLoaded");
-      if (hasLoaded === "true") {
-        setLogoOpacity(1);
-      }
-    }
-  }, []);
-  
   const lastScrollY = useRef(0);
   const isVisible = useRef(true); // Track visibility state without triggering rerenders
 
@@ -162,7 +151,6 @@ export default function Header() {
         <div 
           ref={logoRef} 
           className="flex items-center gap-2 cursor-pointer header-logo-target"
-          style={{ opacity: isHome ? logoOpacity : 1 }}
         >
           <Link href="/" className="relative block w-40 h-16 md:w-52 md:h-14">
             <Image
