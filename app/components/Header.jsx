@@ -19,7 +19,7 @@ export default function Header() {
 
   // Helper to accurately determine if current page is Home across SSR, Vercel preview, and hydration
   const checkIsHome = (path) => {
-    if (!path) return false;
+    if (!path) return true; // Default safely to true (Home) during SSR / static generation of root page
     const cleanPath = path.split("?")[0].split("#")[0].replace(/\/$/, "");
     return cleanPath === "" || cleanPath === "/";
   };
