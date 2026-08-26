@@ -84,34 +84,58 @@ export default function Header() {
 
   // Scroll detection for reverse scroll navigation
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
 
-      // 1. Scrolled threshold for background styling
-      setScrolled(currentScrollY > 60);
+    // Background state
+    setScrolled(currentScrollY > 60);
 
-      // 2. GSAP reverse-scroll hide/show logic
-      if (currentScrollY > lastScrollY.current && currentScrollY > 120) {
-        // Scrolling Down -> Hide Header
-        if (isVisible.current) {
-          gsap.to(headerRef.current, { y: "-100%", duration: 0.4, ease: "power2.out" });
-          isVisible.current = false;
-          setMobileOpen(false); // Close mobile menu if open while scrolling down
-        }
-      } else if (currentScrollY < lastScrollY.current) {
-        // Scrolling Up -> Show Header
-        if (!isVisible.current) {
-          gsap.to(headerRef.current, { y: "0%", duration: 0.4, ease: "power2.out" });
-          isVisible.current = true;
-        }
+    // Hide header when scrolling down
+    if (
+      currentScrollY > lastScrollY.current &&
+      currentScrollY > 120
+    ) {
+      if (isVisible.current) {
+        gsap.to(headerRef.current, {
+          y: "-100%",
+          duration: 0.4,
+          ease: "power2.out",
+          overwrite: true,
+        });
+
+        isVisible.current = false;
+        setMobileOpen(false);
       }
+    }
 
-      lastScrollY.current = currentScrollY;
-    };
+    // Show header when scrolling up
+    else if (currentScrollY < lastScrollY.current) {
+      if (!isVisible.current) {
+        gsap.to(headerRef.current, {
+          y: "0%",
+          duration: 0.4,
+          ease: "power2.out",
+          overwrite: true,
+        });
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+        isVisible.current = true;
+      }
+    }
+
+    lastScrollY.current = currentScrollY;
+  };
+
+  // IMPORTANT: Set correct state immediately on page load
+  handleScroll();
+
+  window.addEventListener("scroll", handleScroll, {
+    passive: true,
+  });
+
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, []);
 
   return (
     <header
@@ -144,7 +168,7 @@ export default function Header() {
         </div>
 
         {/* Desktop Nav */}
-        <nav ref={navRef} className="hidden md:flex items-center gap-8">
+        <nav ref={navRef} className="hidden lg:flex items-center gap-8">
           {navLinks.map((link, i) => (
             <Link
               key={i}
@@ -176,7 +200,7 @@ export default function Header() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden flex flex-col gap-1.5 p-1"
+          className="lg:hidden flex flex-col gap-1.5 p-1"
           aria-label="Toggle menu"
         >
           <span
@@ -199,7 +223,7 @@ export default function Header() {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-500 ${
+        className={`lg:hidden overflow-hidden transition-all duration-500 ${
           mobileOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         } ${
           isHome
