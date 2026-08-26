@@ -16,18 +16,29 @@ const navLinks = [
 
 export default function Header() {
   const pathname = usePathname();
-  const isHome = pathname === "/";
+
+  // Helper to accurately determine if current page is Home across SSR, Vercel preview, and hydration
+  const checkIsHome = (path) => {
+    if (!path) return false;
+    const cleanPath = path.split("?")[0].split("#")[0].replace(/\/$/, "");
+    return cleanPath === "" || cleanPath === "/";
+  };
+
+  const currentPath = pathname || (typeof window !== "undefined" ? window.location.pathname : "/");
+  const isHome = checkIsHome(currentPath);
+
   const headerRef = useRef(null);
   const logoRef = useRef(null);
   const navRef = useRef(null);
   const ctaRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [logoOpacity, setLogoOpacity] = useState(0);
+  const [logoOpacity, setLogoOpacity] = useState(1);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      if (sessionStorage.getItem("hasLoaded") === "true") {
+      const hasLoaded = sessionStorage.getItem("hasLoaded");
+      if (hasLoaded === "true") {
         setLogoOpacity(1);
       }
     }
@@ -49,7 +60,7 @@ export default function Header() {
         { x: -30, opacity: 0 },
         { 
           x: 0, 
-          opacity: typeof window !== "undefined" && sessionStorage.getItem("hasLoaded") === "true" ? 1 : 0, 
+          opacity: 1, 
           duration: 1, 
           ease: "power3.out", 
           delay: 0.5 
