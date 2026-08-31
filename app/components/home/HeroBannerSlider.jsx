@@ -20,8 +20,8 @@ const slides = [
     id: 1,
     image: "/hero/banner_mosque.webp",
         mobImage: "/hero/mosque_thumb.webp",
-    tag: "Cultural / GCC Region",
-    title: "GC Mosque",
+    tag: "Cultural / Saudi Arabia",
+    title: "Oasis Grand Mosque",
     subtitle: "A contemporary congregational landmark inspired by Islamic geometry and desert landscapes, combining sculptural architecture, sustainable design strategies, and lush public spaces for worship, learning, and community.",
     link: "/projects",
     linkText: "View projects",
@@ -31,7 +31,7 @@ const slides = [
     image: "/hero/banner_office.webp",
         mobImage: "/hero/office_thumb.webp",
     tag: "Corporate / Dubai, UAE",
-    title: "Stratex Office",
+    title: "Stratex Corporate Office",
     subtitle: "A refined contemporary workplace designed around professionalism, collaboration, and comfort, combining warm architectural lighting, natural planting, premium materials, and flexible spaces for modern business.",
     link: "/projects",
     linkText: "View projects",
@@ -51,7 +51,7 @@ const slides = [
     image: "/hero/banner_royalyatch.webp",
         mobImage: "/hero/royal_thumb.webp",
     tag: "Hospitality / Dubai, UAE",
-    title: "Royal Sama",
+    title: "Royal Sama Yacht",
     subtitle: "A high-end floating restaurant and luxury hospitality destination, designed as a multi-level yacht offering fine dining, private celebrations, entertainment, and panoramic waterfront experiences.",
     link: "/projects",
     linkText: "View projects",
@@ -199,7 +199,7 @@ export default function HeroBannerSlider() {
             loading="eager"
             fetchPriority="high"
             className="block md:hidden object-cover bg-no-repeat object-center"
-            sizes="100vw"
+            sizes="(max-width: 767px) 100vw, 1px"
           />
           {/* Desktop background image */}
           <Image
@@ -210,7 +210,7 @@ export default function HeroBannerSlider() {
             loading="eager"
             fetchPriority="high"
             className="hidden md:block object-cover bg-no-repeat object-left md:object-center"
-            sizes="100vw"
+            sizes="(max-width: 767px) 1px, 100vw"
           />
           {/* Dark gradient overlays */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/20" />
